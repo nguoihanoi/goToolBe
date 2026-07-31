@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	libProcess "github.com/nguoihanoi/golang_shared/libs/process"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
 	userModel "github.com/nguoihanoi/golang_shared/warehouses/users"
@@ -25,12 +23,10 @@ func ValidateLoginInput(ctx *fastHttp.RequestCtx) (userDetail userModel.User, re
 	status = false
 	libProcess.Try(func() {
 		//Todo: get struct input
-		result, err := libUtilities.Validate(ctx)
+		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		regRequest = result.(LoginInput)
-		log.Println("regRequest", regRequest)
 		userDetail = userModel.GetUserByEmail(regRequest.Email, "")
 		if userDetail.ID != "" {
 			status = true
@@ -48,7 +44,7 @@ func ValidateRegisterInput(ctx *fastHttp.RequestCtx) (regRequest UserRegistratio
 	status = false
 	libProcess.Try(func() {
 		//Todo: get struct input
-		result, err := libUtilities.Validate(ctx)
+		result, err := libUtilities.Validate2(ctx)
 		if err != nil {
 			libProcess.Throw(err)
 		}

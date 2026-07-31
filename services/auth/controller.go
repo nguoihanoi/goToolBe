@@ -8,14 +8,14 @@ import (
 	fastHttp "github.com/valyala/fasthttp"
 )
 
-func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache) {
-	userModel.InitModel(inDb, inRedisClient)
+func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
+	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	listEmail := []string{"playhard24h@gmail.com"}
 	listName := []string{"Thành Nguyễn Viết"}
 	passwordDefault := "abc123!@#"
 	for i := 0; i < len(listEmail); i += 1 {
 		userDetail := userModel.GetUserByEmail(listEmail[i], "")
-		if userDetail.ID != "" {
+		if userDetail.ID == "" {
 			Password, PasswordHash := libUtilities.String().GetHashPassWord(passwordDefault, "", false)
 			inFirstName, inLastName := libUtilities.String().GetFromFullName(listName[i])
 			insertData := userModel.User{
@@ -36,7 +36,7 @@ func Login(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Login false!", 206)
 	userDetail, regRequest, status := ValidateLoginInput(ctx)
 	if status {
-		_, resultStatus := userModel.Login(userDetail, regRequest.Password)
+		_, resultStatus := userModel.Login(userDetail, regRequest.Password, false)
 		if resultStatus {
 			resp.Status = true
 			resp.Message = "Login success!"

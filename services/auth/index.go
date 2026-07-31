@@ -4,16 +4,18 @@ import (
 	"log"
 	"os"
 	"strconv"
-	"time"
 
 	fastHttpRouter "github.com/buaazp/fasthttprouter"
 	"github.com/joho/godotenv"
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
 	libCrypto "github.com/nguoihanoi/golang_shared/libs/crypto"
 	libDb "github.com/nguoihanoi/golang_shared/libs/database"
+	mdWare "github.com/nguoihanoi/golang_shared/libs/middleware"
 	"github.com/redis/go-redis/v9"
 	fastHttp "github.com/valyala/fasthttp"
 )
+
+var libJwt *libCrypto.JwtClass
 
 func initDb(urlConnect string, dbName string) *libDb.DatabaseClass {
 	mongoClient := libDb.MongoConnect(urlConnect)
@@ -28,30 +30,6 @@ func initRedisDb(inAddr string, inDB int, inPassword string, inPrefix string) *l
 		DB:       inDB,       // Default DB
 	})
 	return libCache.NewCache(rdb, inPrefix)
-}
-
-func corsMiddleware(next fastHttp.RequestHandler) fastHttp.RequestHandler {
-	output := func(ctx *fastHttp.RequestCtx) {
-		// Set CORS headers
-		start := time.Now()
-		ctx.Response.Header.Set("Access-Control-Allow-Origin", "*")
-		ctx.Response.Header.Set("Access-Control-Expose-Headers", "Authorization")
-		ctx.Response.Header.Set("Access-Control-Allow-Methods", "POST")
-		ctx.Response.Header.Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Accept, Content-Type, Content-Length, Accept-Encoding, Authorization, X-CSRF-Token, Cache-Control")
-		// Handle preflight (OPTIONS) requests
-		if string(ctx.Method()) == "OPTIONS" {
-			ctx.SetStatusCode(fastHttp.StatusOK)
-			return
-		}
-
-		// Do middleware things
-		defer func() {
-			log.Println(string(ctx.Path()), time.Since(start))
-		}()
-		// Call the next handler
-		next(ctx)
-	}
-	return fastHttp.CompressHandler(output)
 }
 
 func main() {
@@ -79,25 +57,27 @@ func main() {
 	PORT := os.Getenv("PORT")
 	// crypto
 	JWT_SECRET := os.Getenv("JWT_SECRET")
-	PREFIX_TOKEN := os.Getenv("PREFIX_TOKEN")
+	//PREFIX_TOKEN := os.Getenv("PREFIX_TOKEN")
 
 	//Todo: init db
 	mgoDB1 := initDb(MONGO_COMMON_URI, MONGO_COMMON_DB)
 	redisDb1 := initRedisDb(REDIS_HOST, REDIS_DB, REDIS_PASSWORD, REDIS_PREFIX)
 
-	//Todo: init  crypto
-	libCrypto.JWT().SetToken(JWT_SECRET, PREFIX_TOKEN)
-
 	//Todo: init router
 	mainRouter := fastHttpRouter.New()
 
 	//Todo: init db
-	Init(mainRouter, mgoDB1, redisDb1)
+	libJwt = libCrypto.JWT(JWT_SECRET)
+	Init(mainRouter, mgoDB1, redisDb1, JWT_SECRET)
+	corsMid := mdWare.Init("*", "POST", JWT_SECRET)
 
-	// Create a custom logger
+	newToken, nextTime, err := libJwt.CreateToken(`{"email":"playhard24h@gmail.com","password":"abc123!@#"}`)
+	log.Println(newToken, nextTime, err)
+
+	//Todo: Create a custom logger
 	myLogger := log.New(log.Writer(), "FasthttpServer: ", log.LstdFlags)
 	fastHttpServer := &fastHttp.Server{
-		Handler:            corsMiddleware(mainRouter.Handler),
+		Handler:            corsMid.CorsMiddleware(mainRouter.Handler),
 		Logger:             myLogger,
 		Name:               SERVER_NAME,
 		MaxRequestBodySize: 512 * 1024 * 1024,
