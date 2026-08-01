@@ -16,7 +16,8 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 		ctx.SetBodyString("Auth service is up and running")
 	})
 	router.POST("/api/v1/auth/login", mdWare.Post(Login))
-	router.POST("/api/v1/auth/register", Register)
+	router.POST("/api/v1/customer/login", mdWare.Post(CustomerLogin))
+	router.POST("/api/v1/customer/register", mdWare.Post(Register))
 	//router.POST("/login", commonMiddleware.Post(Login))
 	//router.POST("/api/v1/user/register", commonMiddleware.Post(Register))
 }

@@ -27,12 +27,13 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260728045141-222a099ee4af // indirect
-	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731095415-8ae46e09c8cf // indirect
-	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260731083315-9c5647fc9054 // indirect
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260731101451-ed2b23ebe550 // indirect
+	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731101451-ed2b23ebe550 // indirect
+	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260731153322-84d92f813c53 // indirect
 	github.com/nguoihanoi/golang_shared/libs/middleware v0.0.0-20260731101451-ed2b23ebe550 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260727162802-513589b21cd0 // indirect
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260731095415-8ae46e09c8cf // indirect
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260731101451-ed2b23ebe550 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260731153403-a14f9a494cb2 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260731100805-801a485832a5 // indirect
 	github.com/redis/go-redis/v9 v9.21.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
