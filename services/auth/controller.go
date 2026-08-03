@@ -66,7 +66,7 @@ func Register(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Register false!", 206)
 	regRequest, status := ValidateRegisterInput(ctx)
 	if status {
-		Password, PasswordHash := libUtilities.String().GetHashPassWord("", "", false)
+		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, "", false)
 		customerId := customerModel.CreateCustomer(customerModel.Customer{
 			Email:        regRequest.Email,
 			FirstName:    regRequest.FirstName,
