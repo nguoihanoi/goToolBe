@@ -72,7 +72,9 @@ func main() {
 	corsMid := mdWare.Init("*", "POST, GET", JWT_SECRET)
 
 	newToken, nextTime, err := libJwt.CreateToken(`{"email":"playhard24h@gmail.com","password":"abc123!@#"}`)
+	newToken2, nextTime2, err2 := libJwt.CreateToken(`{"customer_id":"1","user_id":"2"}`)
 	log.Println(newToken, nextTime, err)
+	log.Println(newToken2, nextTime2, err2)
 
 	//Todo: Create a custom logger
 	myLogger := log.New(log.Writer(), "FasthttpServer: ", log.LstdFlags)
