@@ -34,7 +34,7 @@ func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, in
 	}
 }
 
-func CustomerLogin(ctx *fastHttp.RequestCtx) {
+func customerLogin(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Login false!", 206)
 	customerDetail, regRequest, status := ValidateCustomerLoginInput(ctx)
 	if status {
@@ -48,7 +48,7 @@ func CustomerLogin(ctx *fastHttp.RequestCtx) {
 	}
 }
 
-func Login(ctx *fastHttp.RequestCtx) {
+func login(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Login false!", 206)
 	userDetail, regRequest, status := ValidateLoginInput(ctx)
 	if status {
@@ -62,7 +62,7 @@ func Login(ctx *fastHttp.RequestCtx) {
 	}
 }
 
-func Register(ctx *fastHttp.RequestCtx) {
+func register(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Register false!", 206)
 	regRequest, status := ValidateRegisterInput(ctx)
 	if status {
@@ -81,4 +81,40 @@ func Register(ctx *fastHttp.RequestCtx) {
 		}
 		libUtilities.Response().SendOutput(ctx, resp)
 	}
+}
+
+type CommandHandler func(ctx *fastHttp.RequestCtx)
+
+// Khai báo map handler 1 lần duy nhất lúc khởi chạy app
+var customerCmdMap = map[string]CommandHandler{
+	"login":    customerLogin,
+	"register": register,
+}
+var authCmdMap = map[string]CommandHandler{
+	"login": login,
+}
+
+func Auth(ctx *fastHttp.RequestCtx) {
+	cmd := ctx.Request.Header.Peek("X-API-Cmd")
+
+	// Ép kiểu string ở đây nếu dùng Map, nhưng tra cứu O(1) rất nhanh
+	if handler, exists := authCmdMap[string(cmd)]; exists {
+		handler(ctx)
+		return
+	}
+
+	ctx.SetStatusCode(fastHttp.StatusBadRequest)
+	ctx.SetBodyString("Invalid or missing X-API-Cmd header")
+}
+func Customer(ctx *fastHttp.RequestCtx) {
+	cmd := ctx.Request.Header.Peek("X-API-Cmd")
+
+	// Ép kiểu string ở đây nếu dùng Map, nhưng tra cứu O(1) rất nhanh
+	if handler, exists := customerCmdMap[string(cmd)]; exists {
+		handler(ctx)
+		return
+	}
+
+	ctx.SetStatusCode(fastHttp.StatusBadRequest)
+	ctx.SetBodyString("Invalid or missing X-API-Cmd header")
 }
