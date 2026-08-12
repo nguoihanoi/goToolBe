@@ -41,7 +41,10 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812072322-e7c40f1aa876 // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20260812081300-6748b540079b // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20260812081300-6748b540079b // indirect
 	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20260812072322-e7c40f1aa876 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260807155829-4b89fb92fd68 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
