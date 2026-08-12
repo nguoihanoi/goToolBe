@@ -13,7 +13,7 @@ func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, in
 	customerModel.InitModel(inDb, inRedisClient, inJwtToken)
 }
 
-func SearchCustomerGroup(ctx *fastHttp.RequestCtx) {
+func searchCustomerGroup(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchCustomerGroupInput(ctx)
 	if status {
@@ -34,7 +34,7 @@ func SearchCustomerGroup(ctx *fastHttp.RequestCtx) {
 	}
 }
 
-func SearchCustomer(ctx *fastHttp.RequestCtx) {
+func searchCustomer(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchCustomerInput(ctx)
 	if status {
@@ -62,4 +62,38 @@ func SearchCustomer(ctx *fastHttp.RequestCtx) {
 		resp.Data = map[string]any{"list": results, "total": total}
 		libUtilities.Response().SendOutput(ctx, resp)
 	}
+}
+
+type CommandHandler func(ctx *fastHttp.RequestCtx)
+
+var customerCmdMap = map[string]CommandHandler{
+	"register": searchCustomer,
+}
+var groupCmdMap = map[string]CommandHandler{
+	"search": searchCustomer,
+}
+
+func Customer(ctx *fastHttp.RequestCtx) {
+	cmd := ctx.Request.Header.Peek("X-API-Cmd")
+
+	// Ép kiểu string ở đây nếu dùng Map, nhưng tra cứu O(1) rất nhanh
+	if handler, exists := customerCmdMap[string(cmd)]; exists {
+		handler(ctx)
+		return
+	}
+
+	ctx.SetStatusCode(fastHttp.StatusBadRequest)
+	ctx.SetBodyString("Invalid or missing X-API-Cmd header")
+}
+func CustomerGroup(ctx *fastHttp.RequestCtx) {
+	cmd := ctx.Request.Header.Peek("X-API-Cmd")
+
+	// Ép kiểu string ở đây nếu dùng Map, nhưng tra cứu O(1) rất nhanh
+	if handler, exists := groupCmdMap[string(cmd)]; exists {
+		handler(ctx)
+		return
+	}
+
+	ctx.SetStatusCode(fastHttp.StatusBadRequest)
+	ctx.SetBodyString("Invalid or missing X-API-Cmd header")
 }
