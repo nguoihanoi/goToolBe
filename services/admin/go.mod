@@ -40,6 +40,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20260812084444-4b98cdcce696 // indirect
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812072322-e7c40f1aa876 // indirect
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20260812081300-6748b540079b // indirect
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20260812081300-6748b540079b // indirect

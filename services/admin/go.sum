@@ -58,6 +58,8 @@ github.com/mattn/go-runewidth v0.0.16 h1:E5ScNMtiwvlvB5paMFdw9p4kSQzbXFikJ5SQO6T
 github.com/mattn/go-runewidth v0.0.16/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
 github.com/muesli/termenv v0.16.0 h1:S5AlUN9dENB57rsbnkPyfdGuWIlkmzJjbFf0Tf5FWUc=
 github.com/muesli/termenv v0.16.0/go.mod h1:ZRfOIKPFDYQoDFF4Olj7/QJbW60Ol/kL1pU3VfY/Cnk=
+github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20260812084444-4b98cdcce696 h1:wkp3SI70WgtAaMoChFqmGjY4xcVcwutZ/rd2R2l10dc=
+github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20260812084444-4b98cdcce696/go.mod h1:iIS5+5MWsV+I3ymWBZIMnvpx5ZESPzYBSyQkw1l6Cp4=
 github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812070926-1500f4d92a62 h1:l/g4f6q5e1LRaaJftCGvyHr77RfBS/ibRkeZH413df4=
 github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812070926-1500f4d92a62/go.mod h1:lQK2yEXeKPKcMam0camomStsBJQrIliOpW8TccqG7is=
 github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812071955-0cf3331e90af h1:H8NhNIXFqSkn7gGtlz/yGxOCTAlVZ/a7t7RXT9j23ds=
