@@ -5,14 +5,14 @@ go 1.25.0
 require (
 	github.com/buaazp/fasthttprouter v0.1.1
 	github.com/joho/godotenv v1.5.1
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260731101451-ed2b23ebe550
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731101451-ed2b23ebe550
-	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807040627-fc2f9a418e47
+	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/libs/middleware v0.0.0-20260731101451-ed2b23ebe550
-	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260727162802-513589b21cd0
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260731101451-ed2b23ebe550
-	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807044925-4f02be53ce09
-	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807044925-4f02be53ce09
+	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92fd68
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb92fd68
+	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68
+	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807155829-4b89fb92fd68
 	github.com/redis/go-redis/v9 v9.21.0
 	github.com/valyala/fasthttp v1.73.0
 )
@@ -40,6 +40,8 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812071955-0cf3331e90af // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20260812071955-0cf3331e90af // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
@@ -50,9 +52,9 @@ require (
 	go.mongodb.org/mongo-driver v1.17.9 // indirect
 	go.mongodb.org/mongo-driver/v2 v2.8.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	golang.org/x/crypto v0.54.0 // indirect
+	golang.org/x/crypto v0.55.0 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/sync v0.22.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.40.0 // indirect
+	golang.org/x/text v0.41.0 // indirect
 )

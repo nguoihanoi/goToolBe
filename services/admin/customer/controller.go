@@ -67,7 +67,7 @@ func searchCustomer(ctx *fastHttp.RequestCtx) {
 type CommandHandler func(ctx *fastHttp.RequestCtx)
 
 var customerCmdMap = map[string]CommandHandler{
-	"register": searchCustomer,
+	"search": searchCustomer,
 }
 var groupCmdMap = map[string]CommandHandler{
 	"search": searchCustomer,
