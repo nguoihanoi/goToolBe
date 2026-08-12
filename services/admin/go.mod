@@ -40,8 +40,8 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
-	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812071955-0cf3331e90af // indirect
-	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20260812071955-0cf3331e90af // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812072322-e7c40f1aa876 // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20260812072322-e7c40f1aa876 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
