@@ -1,4 +1,4 @@
-module github.com/nguoihanoi/goToolBe/admin/user
+module github.com/nguoihanoi/goToolBe/service/admin/user
 
 go 1.25.0
 

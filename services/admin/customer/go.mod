@@ -1,4 +1,4 @@
-module github.com/nguoihanoi/goToolBe/admin/customer
+module github.com/nguoihanoi/goToolBe/service/admin/customer
 
 go 1.25.0
 
