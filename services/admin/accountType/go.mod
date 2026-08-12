@@ -1,4 +1,4 @@
-module github.com/nguoihanoi/goToolBe/services/admin/permission
+module github.com/nguoihanoi/goToolBe/services/admin/accountType
 
 go 1.25.0
 
