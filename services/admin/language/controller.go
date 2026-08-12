@@ -17,7 +17,7 @@ func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, in
 
 func search(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
-	regRequest, status := ValidateSearchLanguageInput(ctx)
+	regRequest, status := ValidateSearchInput(ctx)
 	if status {
 		filter := bSon.M{"delete": 0}
 		inSortOrder := bSon.D{{Key: "delete", Value: 1}}
@@ -29,7 +29,7 @@ func search(ctx *fastHttp.RequestCtx) {
 			}
 		}
 		inSortOrder = append(inSortOrder, bSon.E{Key: "name", Value: 1})
-		results, total := languageModel.SearchLanguages(filter, inSortOrder, regRequest.Page, regRequest.Limit)
+		results, total := languageModel.Searchs(filter, inSortOrder, regRequest.Page, regRequest.Limit)
 		if total > 0 {
 			resp.Status = true
 			resp.Message = "Search success!"
@@ -39,10 +39,67 @@ func search(ctx *fastHttp.RequestCtx) {
 	}
 }
 
+func create(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	regRequest, status := ValidateCreateInput(ctx)
+	if status {
+		result := languageModel.Create(languageModel.Language{
+			Name:     regRequest.Name,
+			Code:     regRequest.Code,
+			Image:    regRequest.Image,
+			Order:    regRequest.Order,
+			Status:   regRequest.Status,
+			AuthorId: regRequest.UserId,
+		})
+		if result != "" {
+			resp.Status = true
+			resp.Message = "Create success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+
+func update(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	regRequest, status := ValidateUpdateInput(ctx)
+	if status {
+		updateOption := bSon.M{"name": regRequest.Name, "code": regRequest.Code, "image": regRequest.Image, "order": regRequest.Order, "status": regRequest.Status}
+		result := languageModel.Update(regRequest.Id, updateOption)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Update success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func delete(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	regRequest, status := ValidateDeleteInput(ctx)
+	if status {
+		result := languageModel.Delete(regRequest.Id)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Delete success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+
+func gets(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(true, "Get success!", 200)
+	results := languageModel.Gets()
+	resp.Data = results
+	libUtilities.Response().SendOutput(ctx, resp)
+}
+
 type CommandHandler func(ctx *fastHttp.RequestCtx)
 
 var languageCmdMap = map[string]CommandHandler{
 	"search": search,
+	"create": create,
+	"update": update,
+	"delete": delete,
+	"gets":   gets,
 }
 
 func Language(ctx *fastHttp.RequestCtx) {
