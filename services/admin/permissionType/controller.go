@@ -71,7 +71,7 @@ func delete(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteInput(ctx)
 	if status {
-		result := permissionModel.DeleteType(regRequest.Id)
+		result := permissionModel.DeleteType(regRequest.ID)
 		if result == true {
 			resp.Status = true
 			resp.Message = "Delete success!"

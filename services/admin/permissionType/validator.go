@@ -63,7 +63,7 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 }
 
 type DeleteInput struct {
-	Id       string `validate:"required" json:"_id"`
+	ID       string `validate:"required" json:"_id"`
 	UserId   string `validate:"required" json:"user_id"`
 	LangCode string `validate:"" json:"lang_code"`
 }
@@ -79,7 +79,7 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		if regRequest.LangCode == "" {
 			regRequest.LangCode = "vi"
 		}
-		typeDetail := permissionModel.GetTypeById(regRequest.Id, true)
+		typeDetail := permissionModel.GetTypeById(regRequest.ID, true)
 		if typeDetail.ID == "" {
 			libUtilities.Response().SendError(ctx, "This permission type information does not exist in the system.", nil, 206)
 		}
