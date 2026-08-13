@@ -42,10 +42,71 @@ func search(ctx *fastHttp.RequestCtx) {
 	}
 }
 
+func create(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	regRequest, status := ValidateCreateInput(ctx)
+	if status {
+		result := permissionModel.CreateAccountType(permissionModel.AccountType{
+			Name:        regRequest.Name,
+			Content:     regRequest.Content,
+			Permissions: regRequest.Permissions,
+			Status:      regRequest.Status,
+			Order:       regRequest.Order,
+			AuthorId:    regRequest.UserId,
+		})
+		if result != "" {
+			resp.Status = true
+			resp.Message = "Create success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func update(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	regRequest, status := ValidateUpdateInput(ctx)
+	if status {
+		updateOption := bSon.M{
+			"name":        regRequest.Name,
+			"content":     regRequest.Content,
+			"permissions": regRequest.Permissions,
+			"status":      regRequest.Status,
+			"order":       regRequest.Order,
+		}
+		result := permissionModel.UpdateAccountType(regRequest.Id, updateOption)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Update success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func delete(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	regRequest, status := ValidateDeleteInput(ctx)
+	if status {
+		result := permissionModel.DeleteAccountType(regRequest.Id)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Delete success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func gets(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(true, "Get success!", 200)
+	results := permissionModel.GetAccountTypes()
+	resp.Data = results
+	libUtilities.Response().SendOutput(ctx, resp)
+}
+
 type CommandHandler func(ctx *fastHttp.RequestCtx)
 
 var accountTypeCmdMap = map[string]CommandHandler{
 	"search": search,
+	"create": create,
+	"update": update,
+	"delete": delete,
+	"gets":   gets,
 }
 
 func AccountType(ctx *fastHttp.RequestCtx) {

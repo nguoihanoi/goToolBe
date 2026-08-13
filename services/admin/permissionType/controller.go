@@ -71,19 +71,13 @@ func delete(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteInput(ctx)
 	if status {
-		result := permissionModel.DeleteType(regRequest.ID)
+		result := permissionModel.DeleteType(regRequest.Id)
 		if result == true {
 			resp.Status = true
 			resp.Message = "Delete success!"
 		}
 		libUtilities.Response().SendOutput(ctx, resp)
 	}
-}
-func gets(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(true, "Get success!", 200)
-	results := permissionModel.GetPermissions()
-	resp.Data = results
-	libUtilities.Response().SendOutput(ctx, resp)
 }
 
 type CommandHandler func(ctx *fastHttp.RequestCtx)
@@ -93,7 +87,6 @@ var permissionTypeCmdMap = map[string]CommandHandler{
 	"create": create,
 	"update": update,
 	"delete": delete,
-	"gets":   gets,
 }
 
 func PermssionType(ctx *fastHttp.RequestCtx) {
