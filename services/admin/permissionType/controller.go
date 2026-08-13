@@ -38,10 +38,62 @@ func search(ctx *fastHttp.RequestCtx) {
 	}
 }
 
+func create(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	regRequest, status := ValidateCreateInput(ctx)
+	if status {
+		result := permissionModel.CreateType(permissionModel.PermissionType{
+			Name:     regRequest.Name,
+			Order:    regRequest.Order,
+			AuthorId: regRequest.UserId,
+		})
+		if result != "" {
+			resp.Status = true
+			resp.Message = "Create success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func update(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	regRequest, status := ValidateUpdateInput(ctx)
+	if status {
+		updateOption := bSon.M{"name": regRequest.Name, "order": regRequest.Order}
+		result := permissionModel.UpdateType(regRequest.Id, updateOption)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Update success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func delete(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	regRequest, status := ValidateDeleteInput(ctx)
+	if status {
+		result := permissionModel.DeleteType(regRequest.Id)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Delete success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func gets(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(true, "Get success!", 200)
+	results := permissionModel.GetPermissions()
+	resp.Data = results
+	libUtilities.Response().SendOutput(ctx, resp)
+}
+
 type CommandHandler func(ctx *fastHttp.RequestCtx)
 
 var permissionTypeCmdMap = map[string]CommandHandler{
 	"search": search,
+	"create": create,
+	"update": update,
+	"delete": delete,
+	"gets":   gets,
 }
 
 func PermssionType(ctx *fastHttp.RequestCtx) {
