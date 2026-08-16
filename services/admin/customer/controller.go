@@ -5,11 +5,13 @@ import (
 	libDb "github.com/nguoihanoi/golang_shared/libs/database"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
 	customerModel "github.com/nguoihanoi/golang_shared/warehouses/customers"
+	userModel "github.com/nguoihanoi/golang_shared/warehouses/users"
 	fastHttp "github.com/valyala/fasthttp"
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
+	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	customerModel.InitModel(inDb, inRedisClient, inJwtToken)
 }
 

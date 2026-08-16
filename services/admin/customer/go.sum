@@ -54,6 +54,8 @@ github.com/mattn/go-runewidth v0.0.16 h1:E5ScNMtiwvlvB5paMFdw9p4kSQzbXFikJ5SQO6T
 github.com/mattn/go-runewidth v0.0.16/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
 github.com/muesli/termenv v0.16.0 h1:S5AlUN9dENB57rsbnkPyfdGuWIlkmzJjbFf0Tf5FWUc=
 github.com/muesli/termenv v0.16.0/go.mod h1:ZRfOIKPFDYQoDFF4Olj7/QJbW60Ol/kL1pU3VfY/Cnk=
+github.com/nguoihanoi/golang_shared v1.0.0 h1:0qj8nH947hHNOvYKBus6zfFSNXF+yvW80TvKBf5zlOc=
+github.com/nguoihanoi/golang_shared v1.0.0/go.mod h1:dJc/HEd7EUrmlJ49/RwIPoBsCrCJKfnkiJMU173c4+I=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260807155829-4b89fb92fd68 h1:bdJmXRzpCnffU5CSmo/IlOlm3WEVG9bjZ6HTMekQO/U=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:FeOWVOe+7JcSsZZAc5/x4tTXTs7DjyKtI8BJT28NrWg=
 github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731101451-ed2b23ebe550 h1:xC4mCXJbEFM/qIvEKDzxz1pDty3Qr5hUi3SqVsv8DTo=
@@ -66,6 +68,8 @@ github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb9
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:1WvId84bBKngJGPZ8e4tsson3InEOoUiIJBHCFGBm+8=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68 h1:uG5z7Ff5rRSbft45hCc81atmYbneNkqniddLMKzymJM=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:xL7b89+SEKgp/8RrmWmxPN2WHIYrcIq4cd1qzeo56S8=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816140757-dc38d7812fd3 h1:JmI8a2jQ1BJu4SOJBDSV9skWywITkqw5ih0WgeqzICo=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816140757-dc38d7812fd3/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/redis/go-redis/v9 v9.21.0 h1:FPBE4hhbAke+TLmcY3WkpbDffJEomdqPn3HYiqAtL9E=

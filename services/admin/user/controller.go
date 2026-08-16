@@ -4,7 +4,7 @@ import (
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
 	libDb "github.com/nguoihanoi/golang_shared/libs/database"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
-	customerModel "github.com/nguoihanoi/golang_shared/warehouses/customers"
+	permissionModel "github.com/nguoihanoi/golang_shared/warehouses/permissions"
 	userModel "github.com/nguoihanoi/golang_shared/warehouses/users"
 	fastHttp "github.com/valyala/fasthttp"
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
@@ -12,7 +12,7 @@ import (
 
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
-	customerModel.InitModel(inDb, inRedisClient, inJwtToken)
+	permissionModel.InitModel(inDb, inRedisClient)
 }
 
 func searchUser(ctx *fastHttp.RequestCtx) {

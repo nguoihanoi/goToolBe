@@ -101,7 +101,7 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 }
 
 type DeleteInput struct {
-	ID       string `validate:"required" json:"_id"`
+	Id       string `validate:"required" json:"_id"`
 	UserId   string `validate:"required" json:"user_id"`
 	LangCode string `validate:"" json:"lang_code"`
 }
