@@ -4,6 +4,7 @@ import (
 	libProcess "github.com/nguoihanoi/golang_shared/libs/process"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
 	permissionModel "github.com/nguoihanoi/golang_shared/warehouses/permissions"
+	userModel "github.com/nguoihanoi/golang_shared/warehouses/users"
 	fastHttp "github.com/valyala/fasthttp"
 )
 
@@ -27,6 +28,14 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		}
 		if regRequest.LangCode == "" {
 			regRequest.LangCode = "vi"
+		}
+		userDetail := userModel.GetUserById(regRequest.UserId, true)
+		if userDetail.AccountType != "1" {
+			userDetail.ID = ""
+		}
+		if userDetail.ID == "" {
+			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			return
 		}
 		if len(regRequest.Permissions) > 0 {
 			regRequest.Permissions = libUtilities.Array().RemoveDuplicates(regRequest.Permissions, false)

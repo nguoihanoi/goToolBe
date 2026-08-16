@@ -4,6 +4,7 @@ import (
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
 	libDb "github.com/nguoihanoi/golang_shared/libs/database"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
+	languageModel "github.com/nguoihanoi/golang_shared/warehouses/languages"
 	permissionModel "github.com/nguoihanoi/golang_shared/warehouses/permissions"
 	userModel "github.com/nguoihanoi/golang_shared/warehouses/users"
 	fastHttp "github.com/valyala/fasthttp"
@@ -12,6 +13,7 @@ import (
 
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
+	languageModel.InitModel(inDb, inRedisClient)
 	permissionModel.InitModel(inDb, inRedisClient)
 }
 
