@@ -1,6 +1,9 @@
 package accountType
 
 import (
+	"sync"
+	"sync/atomic"
+
 	libProcess "github.com/nguoihanoi/golang_shared/libs/process"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
 	permissionModel "github.com/nguoihanoi/golang_shared/warehouses/permissions"
@@ -20,8 +23,8 @@ type CreateInput struct {
 
 func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, status bool) {
 	status = false
+
 	libProcess.Try(func() {
-		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
@@ -29,28 +32,58 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		if regRequest.LangCode == "" {
 			regRequest.LangCode = "vi"
 		}
-		userDetail := userModel.GetUserById(regRequest.UserId, true)
-		if userDetail.AccountType != "1" {
-			userDetail.ID = ""
+		if len(regRequest.Permissions) > 0 {
+			regRequest.Permissions = libUtilities.Array().RemoveDuplicates(regRequest.Permissions, false)
 		}
+		var (
+			wg               sync.WaitGroup
+			userDetail       userModel.User
+			invalidPermFound atomic.Bool
+			sem              = make(chan struct{}, 4)
+		)
+		wg.Add(1)
+		sem <- struct{}{}
+		go func() {
+			defer wg.Done()
+			defer func() { <-sem }()
+			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			if userDetail.AccountType != "1" {
+				userDetail.ID = ""
+			}
+		}()
+		for _, permID := range regRequest.Permissions {
+			if invalidPermFound.Load() {
+				break
+			}
+			wg.Add(1)
+			sem <- struct{}{}
+			go func(id string) {
+				defer wg.Done()
+				defer func() { <-sem }()
+				if invalidPermFound.Load() {
+					return
+				}
+				permissionDetail := permissionModel.GetPermissionById(id, true)
+				if permissionDetail.ID == "" {
+					invalidPermFound.Store(true)
+				}
+			}(permID)
+		}
+		wg.Wait()
 		if userDetail.ID == "" {
 			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
-		if len(regRequest.Permissions) > 0 {
-			regRequest.Permissions = libUtilities.Array().RemoveDuplicates(regRequest.Permissions, false)
-			for i := 0; i < len(regRequest.Permissions); i += 1 {
-				permissionDetail := permissionModel.GetPermissionById(regRequest.Permissions[i], true)
-				if permissionDetail.ID == "" {
-					libUtilities.Response().SendError(ctx, "This permission information does not exist in the system.", nil, 206)
-					return
-				}
-			}
+		if invalidPermFound.Load() {
+			libUtilities.Response().SendError(ctx, "This permission information does not exist in the system.", nil, 206)
+			return
 		}
+
 		status = true
 	}).Catch(func(e libProcess.E) {
 		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
 	})
+
 	return regRequest, status
 }
 
@@ -68,7 +101,6 @@ type UpdateInput struct {
 func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, status bool) {
 	status = false
 	libProcess.Try(func() {
-		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
@@ -78,17 +110,61 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		}
 		if len(regRequest.Permissions) > 0 {
 			regRequest.Permissions = libUtilities.Array().RemoveDuplicates(regRequest.Permissions, false)
-			for i := 0; i < len(regRequest.Permissions); i += 1 {
-				permissionDetail := permissionModel.GetPermissionById(regRequest.Permissions[i], true)
-				if permissionDetail.ID == "" {
-					libUtilities.Response().SendError(ctx, "This permission information does not exist in the system.", nil, 206)
+		}
+		var (
+			wg                sync.WaitGroup
+			userDetail        userModel.User
+			accountTypeDetail permissionModel.AccountType
+			invalidPermFound  atomic.Bool
+			sem               = make(chan struct{}, 4)
+		)
+		wg.Add(1)
+		sem <- struct{}{}
+		go func() {
+			defer wg.Done()
+			defer func() { <-sem }()
+			userDetail = userModel.GetUserById(regRequest.UserId, true)
+		}()
+		wg.Add(1)
+		sem <- struct{}{}
+		go func() {
+			defer wg.Done()
+			defer func() { <-sem }()
+			accountTypeDetail = permissionModel.GetAccountTypeById(regRequest.Id, true)
+		}()
+		for _, permID := range regRequest.Permissions {
+			if invalidPermFound.Load() {
+				break
+			}
+			wg.Add(1)
+			sem <- struct{}{}
+			go func(id string) {
+				defer wg.Done()
+				defer func() { <-sem }()
+				if invalidPermFound.Load() {
 					return
 				}
-			}
+				permissionDetail := permissionModel.GetPermissionById(id, true)
+				if permissionDetail.ID == "" {
+					invalidPermFound.Store(true)
+				}
+			}(permID)
 		}
-		accountTypeDetail := permissionModel.GetAccountTypeById(regRequest.Id, true)
+		wg.Wait()
+		if userDetail.AccountType != "1" {
+			userDetail.ID = ""
+		}
+		if userDetail.ID == "" {
+			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			return
+		}
+		if invalidPermFound.Load() {
+			libUtilities.Response().SendError(ctx, "This permission information does not exist in the system.", nil, 206)
+			return
+		}
 		if accountTypeDetail.ID == "" {
 			libUtilities.Response().SendError(ctx, "This account type information does not exist in the system.", nil, 206)
+			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
@@ -114,7 +190,28 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		if regRequest.LangCode == "" {
 			regRequest.LangCode = "vi"
 		}
-		accountTypeDetail := permissionModel.GetAccountTypeById(regRequest.Id, true)
+		var (
+			wg                sync.WaitGroup
+			userDetail        userModel.User
+			accountTypeDetail permissionModel.AccountType
+		)
+		wg.Add(2)
+		go func() {
+			defer wg.Done()
+			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			if userDetail.AccountType != "1" {
+				userDetail.ID = ""
+			}
+		}()
+		go func() {
+			defer wg.Done()
+			accountTypeDetail = permissionModel.GetAccountTypeById(regRequest.Id, true)
+		}()
+		wg.Wait()
+		if userDetail.ID == "" {
+			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			return
+		}
 		if accountTypeDetail.ID == "" {
 			libUtilities.Response().SendError(ctx, "This account type information does not exist in the system.", nil, 206)
 		}
@@ -130,6 +227,7 @@ type SearchAccountTypeInput struct {
 	Status   int    `validate:"min=1" json:"status"`
 	Page     int64  `validate:"min=1" json:"page"`
 	Limit    int64  `validate:"min=0" json:"limit"`
+	UserId   string `validate:"required" json:"user_id"`
 	LangCode string `validate:"" json:"lang_code"`
 }
 
@@ -143,6 +241,14 @@ func ValidateSearchAccountTypeInput(ctx *fastHttp.RequestCtx) (regRequest Search
 		}
 		if regRequest.LangCode == "" {
 			regRequest.LangCode = "vi"
+		}
+		userDetail := userModel.GetUserById(regRequest.UserId, true)
+		if userDetail.AccountType != "1" {
+			userDetail.ID = ""
+		}
+		if userDetail.ID == "" {
+			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
