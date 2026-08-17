@@ -111,13 +111,16 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	}
 	// 2. Decode image metadata (reads header only)
 	checkImage := strings.Contains(detectedMime, "image/")
-	log.Println(checkImage)
 	if checkImage {
 		config, imageName, err := image.DecodeConfig(file)
-		log.Println(config, imageName)
+		log.Println(config, imageName, err)
 		if err == nil {
 			fileMetadata.Height = config.Height
 			fileMetadata.Width = config.Width
+		}
+		// 3. Reset stream pointer if saving or processing the file afterwards
+		if seeker, ok := file.(io.Seeker); ok {
+			seeker.Seek(0, io.SeekStart)
 		}
 	}
 	// Store locally
