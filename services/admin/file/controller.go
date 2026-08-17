@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 	"time"
@@ -82,10 +83,12 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 		UpdatedAt:     time.Now(),
 	}
 	// Store locally
-	localDir := "" // libFile.GetFileFolder()
+	localDir := "D:\\upload\\go" // libFile.GetFileFolder()
 	// Ensure uploads directory exists
+	log.Println(localDir)
 	if err := os.MkdirAll(localDir, 0755); err != nil {
-		libUtilities.Response().SendError(ctx, "Failed to create uploads directory.", nil, 206)
+		log.Println(err)
+		libUtilities.Response().SendError(ctx, "Failed to create upload1s directory.", nil, 206)
 		return
 	}
 	localFilePath := fmt.Sprintf("%s/%s%s", localDir, fileMetadata.ID, fileExt)
