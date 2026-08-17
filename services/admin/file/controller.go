@@ -52,7 +52,14 @@ func search(ctx *fastHttp.RequestCtx) {
 		libUtilities.Response().SendOutput(ctx, resp)
 	}
 }
-
+func getFileType(filename string) string {
+	ext := filepath.Ext(filename) // e.g., ".PNG"
+	if ext == "" {
+		return "unknown"
+	}
+	// Strip the leading dot and normalize to lowercase
+	return strings.ToLower(strings.TrimPrefix(ext, "."))
+}
 func UploadFile(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Upload false!", 206)
 	// Process multipart form
@@ -81,6 +88,7 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	fileMetadata := fileModel.File{
 		ID:            primitive.NewObjectID().Hex(),
 		Name:          fileHeader.Filename,
+		Ext:           getFileType(fileHeader.Filename),
 		Size:          fileHeader.Size,
 		Type:          fileHeader.Header.Get("Content-Type"),
 		StoredLocally: true,
@@ -127,7 +135,10 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	if result != "" {
 		resp.Status = true
 		resp.Message = "Upload success!"
-		resp.Data = fileMetadata.ID
+		resp.Data = map[string]string{
+			"_id":  fileMetadata.ID,
+			"link": libUtilities.Request().GetBaseURL(ctx, "image/"+fileMetadata.ID+fileMetadata.Ext),
+		}
 	}
 	libUtilities.Response().SendOutput(ctx, resp)
 }
