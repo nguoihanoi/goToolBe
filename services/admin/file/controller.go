@@ -8,7 +8,6 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -112,8 +111,7 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	// 2. Decode image metadata (reads header only)
 	checkImage := strings.Contains(detectedMime, "image/")
 	if checkImage {
-		config, imageName, err := image.DecodeConfig(file)
-		log.Println(config, imageName, err)
+		config, _, err := image.DecodeConfig(file)
 		if err == nil {
 			fileMetadata.Height = config.Height
 			fileMetadata.Width = config.Width
