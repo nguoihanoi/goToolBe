@@ -58,6 +58,8 @@ func main() {
 	// crypto
 	JWT_SECRET := os.Getenv("JWT_SECRET")
 	//PREFIX_TOKEN := os.Getenv("PREFIX_TOKEN")
+	// upload
+	UPLOAD_FOLDER := os.Getenv("UPLOAD_FOLDER")
 
 	//Todo: init db
 	mgoDB1 := initDb(MONGO_COMMON_URI, MONGO_COMMON_DB)
@@ -68,7 +70,7 @@ func main() {
 
 	//Todo: init db
 	libJwt = libCrypto.JWT(JWT_SECRET)
-	Init(mainRouter, mgoDB1, redisDb1, JWT_SECRET)
+	Init(mainRouter, mgoDB1, redisDb1, JWT_SECRET, UPLOAD_FOLDER)
 	corsMid := mdWare.Init("*", "POST, GET", JWT_SECRET)
 
 	newToken, nextTime, err := libJwt.CreateToken(`{"email":"playhard24h@gmail.com","password":"abc123!@#"}`)

@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -20,13 +21,13 @@ import (
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
-var folderUpload string
+var storageDir string
 
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string, inFolder string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	languageModel.InitModel(inDb, inRedisClient)
 	fileModel.InitModel(inDb, inRedisClient)
-	folderUpload = inFolder
+	storageDir = inFolder
 }
 
 func search(ctx *fastHttp.RequestCtx) {
@@ -88,7 +89,7 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	}
 	// Store locally
 	newFolderName := strings.Join(strings.Split(libUtilities.Time().FormatDate(curTime), "-"), "_")
-	localDir := folderUpload + "/" + newFolderName
+	localDir := storageDir + "/" + newFolderName
 	// Ensure uploads directory exists
 	if err := os.MkdirAll(localDir, 0755); err != nil {
 		libUtilities.Response().SendError(ctx, "Failed to create upload1s directory.", nil, 206)
@@ -132,7 +133,39 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	}
 	libUtilities.Response().SendOutput(ctx, resp)
 }
+func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
+	// 1. Sanitize & bảo mật đường dẫn (Chống tấn công Path Traversal như "../../etc/passwd")
+	cleanFileName := filepath.Base(fileName)
+	fileId := strings.Split(cleanFileName, ".")[0]
+	fileDetail := fileModel.GetById(fileId, true)
+	if fileDetail.ID != "" {
+		filePath := fileDetail.LocalPath
+		// 2. Kiểm tra xem File có tồn tại hay không
+		if _, err := os.Stat(filePath); os.IsNotExist(err) {
+			libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
+			return
+		}
+		ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
+		ctx.Response.Header.Set("Content-Type", fileDetail.Type)
+		ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
+		fastHttp.ServeFile(ctx, filePath)
+	} else {
+		libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
+	}
+}
+func DownloadFile(ctx *fastHttp.RequestCtx) {
+	path := string(ctx.Path())
 
+	// Bắt route dạng: /api/file/{filename}
+	const routePrefix = "/api/file/"
+	if len(path) > len(routePrefix) && path[:len(routePrefix)] == routePrefix {
+		// Trích xuất filename từ URL (Ví dụ: xxx.jpg)
+		fileName := path[len(routePrefix):]
+		handleDownloadFile(ctx, fileName)
+		return
+	}
+	libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
+}
 func update(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)

@@ -15,10 +15,10 @@ import (
 	fastHttp "github.com/valyala/fasthttp"
 )
 
-func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
+func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string, inFolderName string) {
 	user.InitController(inDb, inRedisClient, inJwtToken)
 	language.InitController(inDb, inRedisClient, inJwtToken)
-	file.InitController(inDb, inRedisClient, inJwtToken)
+	file.InitController(inDb, inRedisClient, inJwtToken, inFolderName)
 	customer.InitController(inDb, inRedisClient, inJwtToken)
 	permission.InitController(inDb, inRedisClient, inJwtToken)
 	permissionType.InitController(inDb, inRedisClient, inJwtToken)
@@ -29,6 +29,7 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	})
 	router.GET("/api/v1/user", user.User)
 	router.GET("/api/v1/file", file.File)
+	router.GET("/api/file", file.DownloadFile)
 	router.POST("/api/v1/file/upload", file.UploadFile)
 	router.GET("/api/v1/language", language.Language)
 	router.GET("/api/v1/customer", customer.Customer)
