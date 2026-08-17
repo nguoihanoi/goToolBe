@@ -131,13 +131,14 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 		}
 	}
 	//
+	fileMetadata.S3Key = newFolderName + "/" + fileMetadata.ID + fileMetadata.Ext
 	result := fileModel.Create(fileMetadata)
 	if result != "" {
 		resp.Status = true
 		resp.Message = "Upload success!"
 		resp.Data = map[string]string{
 			"_id":  fileMetadata.ID,
-			"link": libUtilities.Request().GetBaseURL(ctx, "image/"+fileMetadata.ID+fileMetadata.Ext),
+			"link": libUtilities.Request().GetBaseURL(ctx, "image/"+fileMetadata.S3Key),
 		}
 	}
 	libUtilities.Response().SendOutput(ctx, resp)
