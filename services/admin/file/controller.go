@@ -139,17 +139,34 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 		filePath := fileDetail.LocalPath
 		// 2. Kiểm tra xem File có tồn tại hay không
 		if _, err := os.Stat(filePath); os.IsNotExist(err) {
-			libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
+			ctx.SetStatusCode(fastHttp.StatusNotFound)
+			ctx.SetBodyString("File not found")
 			return
 		}
+		imageData, err := os.ReadFile(filePath)
+		if err != nil {
+			ctx.SetStatusCode(fastHttp.StatusNotFound)
+			ctx.SetBodyString("File not found")
+			return
+		}
+		// Set appropriate Content-Type header
+		ctx.SetContentType(fileDetail.Type)
+
+		// Set cache control for browser optimization (optional)
+		ctx.Response.Header.Set("Cache-Control", "public, max-age=86400")
+
+		// Write raw image bytes
+		ctx.SetBody(imageData)
 		/*
 			ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
 			ctx.Response.Header.Set("Content-Type", fileDetail.Type)
 			ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
+			fastHttp.ServeFile(ctx, filePath)
 		*/
-		fastHttp.ServeFile(ctx, filePath)
 	} else {
-		libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
+		ctx.SetStatusCode(fastHttp.StatusNotFound)
+		ctx.SetBodyString("File not found")
+		return
 	}
 }
 func DownloadFile(ctx *fastHttp.RequestCtx) {
