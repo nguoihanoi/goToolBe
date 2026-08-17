@@ -15,6 +15,101 @@ func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, in
 	permissionModel.InitModel(inDb, inRedisClient)
 }
 
+func createUser(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	regRequest, status := ValidateCreateInput(ctx)
+	if status {
+		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, "", false)
+		result := userModel.CreateUser(userModel.User{
+			AccountType:  regRequest.AccountType,
+			Email:        regRequest.Email,
+			FirstName:    regRequest.FirstName,
+			LastName:     regRequest.LastName,
+			Password:     Password,
+			PasswordHash: PasswordHash,
+			IsActive:     false,
+		})
+		if result != "" {
+			resp.Status = true
+			resp.Message = "Create success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func updateUser(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	regRequest, status := ValidateUpdateInput(ctx)
+	if status {
+		updateOption := bSon.M{
+			"account_type": regRequest.AccountType,
+			"email":        regRequest.Email,
+			"first_name":   regRequest.FirstName,
+			"last_name":    regRequest.LastName,
+		}
+		result := userModel.UpdateUser(regRequest.ID, updateOption)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Update success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func deleteUser(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	regRequest, status := ValidateDeleteInput(ctx)
+	if status {
+		result := userModel.DeleteUser(regRequest.ID)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Delete success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func activeUser(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Active false!", 206)
+	userDetail, status := ValidateActiveInput(ctx)
+	if status {
+		updateOption := bSon.M{"is_active": true}
+		if userDetail.IsActive == true {
+			updateOption["is_active"] = false
+		}
+		result := userModel.UpdateUser(userDetail.ID, updateOption)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Active success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func updatePassword(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Active false!", 206)
+	userDetail, regRequest, status := ValidateUpdatePasswordInput(ctx)
+	if status {
+		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
+		updateOption := bSon.M{"password_hash": PasswordHash, "password": Password}
+		result := userModel.UpdateUser(regRequest.UserId, updateOption)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Active success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
+func updatePasswordById(ctx *fastHttp.RequestCtx) {
+	resp := libUtilities.Response().GetOutput(false, "Active false!", 206)
+	userDetail, regRequest, status := ValidateUpdatePasswordByIdInput(ctx)
+	if status {
+		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
+		updateOption := bSon.M{"password_hash": PasswordHash, "password": Password}
+		result := userModel.UpdateUser(regRequest.UserId, updateOption)
+		if result == true {
+			resp.Status = true
+			resp.Message = "Active success!"
+		}
+		libUtilities.Response().SendOutput(ctx, resp)
+	}
+}
 func searchUser(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchUserInput(ctx)
@@ -48,7 +143,13 @@ func searchUser(ctx *fastHttp.RequestCtx) {
 type CommandHandler func(ctx *fastHttp.RequestCtx)
 
 var userCmdMap = map[string]CommandHandler{
-	"search": searchUser,
+	"search":             searchUser,
+	"create":             createUser,
+	"update":             updateUser,
+	"delete":             deleteUser,
+	"active":             activeUser,
+	"updatePassword":     updatePassword,
+	"updatePasswordById": updatePasswordById,
 }
 
 func User(ctx *fastHttp.RequestCtx) {

@@ -8,7 +8,7 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68
-	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807155829-4b89fb92fd68
+	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816155621-0d2e03bc9921
 	github.com/valyala/fasthttp v1.73.0
 	go.mongodb.org/mongo-driver/v2 v2.8.0
 )

@@ -65,8 +65,8 @@ func update(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
-		updateOption := bSon.M{"name": regRequest.Name, "order": regRequest.Order}
-		result := permissionModel.UpdateType(regRequest.ID, updateOption)
+		updateOption := bSon.M{"name": regRequest.Name, "type_id": regRequest.PermissionTypeID, "order": regRequest.Order}
+		result := permissionModel.UpdatePermission(regRequest.ID, updateOption, regRequest.PermissionTypeID)
 		if result == true {
 			resp.Status = true
 			resp.Message = "Update success!"
@@ -78,7 +78,7 @@ func delete(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteInput(ctx)
 	if status {
-		result := permissionModel.DeleteType(regRequest.ID)
+		result := permissionModel.DeletePermission(regRequest.ID)
 		if result == true {
 			resp.Status = true
 			resp.Message = "Delete success!"

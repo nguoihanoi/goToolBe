@@ -37,7 +37,7 @@ require (
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731101451-ed2b23ebe550 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260815033746-22d58fb55ab6 // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816140757-dc38d7812fd3 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816155621-0d2e03bc9921 // indirect
 	github.com/redis/go-redis/v9 v9.21.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
