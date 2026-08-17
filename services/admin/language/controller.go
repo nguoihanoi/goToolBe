@@ -29,7 +29,7 @@ func search(ctx *fastHttp.RequestCtx) {
 			}
 		}
 		inSortOrder = append(inSortOrder, bSon.E{Key: "name", Value: 1})
-		results, total := languageModel.Searchs(filter, inSortOrder, regRequest.Page, regRequest.Limit)
+		results, total := languageModel.Search(filter, inSortOrder, regRequest.Page, regRequest.Limit)
 		if total > 0 {
 			resp.Status = true
 			resp.Message = "Search success!"
