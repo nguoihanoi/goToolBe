@@ -29,7 +29,7 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	})
 	router.GET("/api/v1/user", user.User)
 	router.GET("/api/v1/file", file.File)
-	router.GET("/api/file", file.DownloadFile)
+	router.GET("/api/file/:id", file.DownloadFile)
 	router.POST("/api/v1/file/upload", file.UploadFile)
 	router.GET("/api/v1/language", language.Language)
 	router.GET("/api/v1/customer", customer.Customer)

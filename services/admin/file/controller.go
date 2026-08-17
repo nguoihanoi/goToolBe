@@ -156,16 +156,9 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 	}
 }
 func DownloadFile(ctx *fastHttp.RequestCtx) {
-	path := string(ctx.Path())
-	log.Println(path)
-	// Bắt route dạng: /api/file/{filename}
-	const routePrefix = "/api/file/"
-	if len(path) > len(routePrefix) && path[:len(routePrefix)] == routePrefix {
-		// Trích xuất filename từ URL (Ví dụ: xxx.jpg)
-		fileName := path[len(routePrefix):]
-		handleDownloadFile(ctx, fileName)
-		return
-	}
+	fileName := ctx.UserValue("id").(string)
+	log.Println(fileName)
+	handleDownloadFile(ctx, fileName)
 	libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
 }
 func update(ctx *fastHttp.RequestCtx) {
