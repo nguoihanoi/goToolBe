@@ -4,10 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"time"
 
@@ -85,8 +83,6 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 		Size:          fileHeader.Size,
 		Type:          fileHeader.Header.Get("Content-Type"),
 		StoredLocally: true,
-		CreatedAt:     curTime,
-		UpdatedAt:     curTime,
 	}
 	// Store locally
 	newFolderName := strings.Join(strings.Split(libUtilities.Time().FormatDate(curTime), "-"), "_")
@@ -139,7 +135,6 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 	cleanFileName := filepath.Base(fileName)
 	fileId := strings.Split(cleanFileName, ".")[0]
 	fileDetail := fileModel.GetById(fileId, true)
-	log.Println(fileId, fileDetail)
 	if fileDetail.ID != "" {
 		filePath := fileDetail.LocalPath
 		// 2. Kiểm tra xem File có tồn tại hay không
@@ -147,9 +142,11 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 			libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
 			return
 		}
-		ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
-		ctx.Response.Header.Set("Content-Type", fileDetail.Type)
-		ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
+		/*
+			ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
+			ctx.Response.Header.Set("Content-Type", fileDetail.Type)
+			ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
+		*/
 		fastHttp.ServeFile(ctx, filePath)
 	} else {
 		libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
@@ -157,7 +154,6 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 }
 func DownloadFile(ctx *fastHttp.RequestCtx) {
 	fileName := ctx.UserValue("id").(string)
-	log.Println(fileName)
 	handleDownloadFile(ctx, fileName)
 }
 func update(ctx *fastHttp.RequestCtx) {
