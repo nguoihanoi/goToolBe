@@ -6,7 +6,6 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 	"time"
 
@@ -143,11 +142,11 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 			libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
 			return
 		}
-		//*
-		ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
-		ctx.Response.Header.Set("Content-Type", fileDetail.Type)
-		ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
-		//*/
+		/*
+			ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
+			ctx.Response.Header.Set("Content-Type", fileDetail.Type)
+			ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
+		*/
 		fastHttp.ServeFile(ctx, filePath)
 	} else {
 		libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
