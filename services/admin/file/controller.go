@@ -139,7 +139,7 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 	cleanFileName := filepath.Base(fileName)
 	fileId := strings.Split(cleanFileName, ".")[0]
 	fileDetail := fileModel.GetById(fileId, true)
-	log.Println(fileDetail)
+	log.Println(fileId, fileDetail)
 	if fileDetail.ID != "" {
 		filePath := fileDetail.LocalPath
 		// 2. Kiểm tra xem File có tồn tại hay không
