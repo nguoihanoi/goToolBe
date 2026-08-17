@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -81,6 +82,15 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 		return
 	}
 	defer file.Close()
+	// Read the first 512 bytes (standard buffer size for MIME detection)
+	buffer := make([]byte, 512)
+	n, err := file.Read(buffer)
+	if err != nil && err != io.EOF {
+		ctx.SetStatusCode(fastHttp.StatusInternalServerError)
+		return
+	}
+	// Detect MIME type from raw magic bytes
+	detectedMime := http.DetectContentType(buffer[:n])
 	fileExt := filepath.Ext(fileHeader.Filename)
 
 	// Create file metadata
@@ -90,7 +100,7 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 		Name:          fileHeader.Filename,
 		Ext:           getFileType(fileHeader.Filename),
 		Size:          fileHeader.Size,
-		Type:          fileHeader.Header.Get("Content-Type"),
+		Type:          detectedMime, //fileHeader.Header.Get("Content-Type"),
 		StoredLocally: true,
 	}
 	// Store locally
