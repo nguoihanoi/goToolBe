@@ -157,7 +157,7 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 }
 func DownloadFile(ctx *fastHttp.RequestCtx) {
 	path := string(ctx.Path())
-
+	log.Println(path)
 	// Bắt route dạng: /api/file/{filename}
 	const routePrefix = "/api/file/"
 	if len(path) > len(routePrefix) && path[:len(routePrefix)] == routePrefix {
