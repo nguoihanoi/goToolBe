@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
@@ -20,10 +20,13 @@ import (
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
-func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
+var folderUpload string
+
+func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string, inFolder string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	languageModel.InitModel(inDb, inRedisClient)
 	fileModel.InitModel(inDb, inRedisClient)
+	folderUpload = inFolder
 }
 
 func search(ctx *fastHttp.RequestCtx) {
@@ -73,21 +76,21 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	fileExt := filepath.Ext(fileHeader.Filename)
 
 	// Create file metadata
+	curTime := time.Now()
 	fileMetadata := fileModel.File{
 		ID:            primitive.NewObjectID().Hex(),
 		Name:          fileHeader.Filename,
 		Size:          fileHeader.Size,
 		Type:          fileHeader.Header.Get("Content-Type"),
 		StoredLocally: true,
-		CreatedAt:     time.Now(),
-		UpdatedAt:     time.Now(),
+		CreatedAt:     curTime,
+		UpdatedAt:     curTime,
 	}
 	// Store locally
-	localDir := "D:\\upload\\go" // libFile.GetFileFolder()
+	newFolderName := strings.Join(strings.Split(libUtilities.Time().FormatDate(curTime), "-"), "_")
+	localDir := folderUpload + "/" + newFolderName
 	// Ensure uploads directory exists
-	log.Println(localDir)
 	if err := os.MkdirAll(localDir, 0755); err != nil {
-		log.Println(err)
 		libUtilities.Response().SendError(ctx, "Failed to create upload1s directory.", nil, 206)
 		return
 	}
@@ -125,6 +128,7 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	if result != "" {
 		resp.Status = true
 		resp.Message = "Upload success!"
+		resp.Data = fileMetadata.ID
 	}
 	libUtilities.Response().SendOutput(ctx, resp)
 }
