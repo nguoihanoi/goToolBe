@@ -58,7 +58,7 @@ func getFileType(filename string) string {
 		return "unknown"
 	}
 	// Strip the leading dot and normalize to lowercase
-	return strings.ToLower(strings.TrimPrefix(ext, "."))
+	return strings.ToLower(ext)
 }
 func UploadFile(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Upload false!", 206)
