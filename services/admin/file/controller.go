@@ -159,7 +159,6 @@ func DownloadFile(ctx *fastHttp.RequestCtx) {
 	fileName := ctx.UserValue("id").(string)
 	log.Println(fileName)
 	handleDownloadFile(ctx, fileName)
-	libUtilities.Response().SendError(ctx, "File not found.", nil, 206)
 }
 func update(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
