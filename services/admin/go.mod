@@ -7,7 +7,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20260812084444-4b98cdcce696
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20260812072322-e7c40f1aa876
-	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20260817154224-2c975151c968
+	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20260817155637-16be8820d870
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20260817072734-5117c741206d
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20260812081300-6748b540079b
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20260812081300-6748b540079b

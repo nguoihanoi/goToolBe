@@ -3,6 +3,7 @@ package file
 import (
 	"encoding/json"
 	"fmt"
+	"image"
 	"io"
 	"net/http"
 	"os"
@@ -102,6 +103,15 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 		Size:          fileHeader.Size,
 		Type:          detectedMime, //fileHeader.Header.Get("Content-Type"),
 		StoredLocally: true,
+	}
+	// 2. Decode image metadata (reads header only)
+	checkImage := strings.Contains(detectedMime, "image/")
+	if checkImage {
+		config, _, err := image.DecodeConfig(file)
+		if err == nil {
+			fileMetadata.Height = config.Height
+			fileMetadata.Width = config.Width
+		}
 	}
 	// Store locally
 	newFolderName := strings.Join(strings.Split(libUtilities.Time().FormatDate(curTime), "-"), "_")
