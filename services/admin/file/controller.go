@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -130,8 +131,8 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	}
 	libUtilities.Response().SendOutput(ctx, resp)
 }
-func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
-	// 1. Sanitize & bảo mật đường dẫn (Chống tấn công Path Traversal như "../../etc/passwd")
+func DownloadFile(ctx *fastHttp.RequestCtx) {
+	fileName := ctx.UserValue("id").(string)
 	cleanFileName := filepath.Base(fileName)
 	fileId := strings.Split(cleanFileName, ".")[0]
 	fileDetail := fileModel.GetById(fileId, true)
@@ -143,6 +144,23 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 			ctx.SetBodyString("File not found")
 			return
 		}
+		ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
+		ctx.Response.Header.Set("Content-Type", fileDetail.Type)
+		ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
+		fastHttp.ServeFile(ctx, filePath)
+	} else {
+		ctx.SetStatusCode(fastHttp.StatusNotFound)
+		ctx.SetBodyString("File not found")
+		return
+	}
+}
+func ViewImage(ctx *fastHttp.RequestCtx) {
+	fileName := ctx.UserValue("id").(string)
+	cleanFileName := filepath.Base(fileName)
+	fileId := strings.Split(cleanFileName, ".")[0]
+	fileDetail := fileModel.GetById(fileId, true)
+	if fileDetail.ID != "" {
+		filePath := fileDetail.LocalPath
 		imageData, err := os.ReadFile(filePath)
 		if err != nil {
 			ctx.SetStatusCode(fastHttp.StatusNotFound)
@@ -157,21 +175,11 @@ func handleDownloadFile(ctx *fastHttp.RequestCtx, fileName string) {
 
 		// Write raw image bytes
 		ctx.SetBody(imageData)
-		/*
-			ctx.Response.Header.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", fileDetail.Name))
-			ctx.Response.Header.Set("Content-Type", fileDetail.Type)
-			ctx.Response.Header.Set("Content-Length", strconv.FormatInt(fileDetail.Size, 10))
-			fastHttp.ServeFile(ctx, filePath)
-		*/
 	} else {
 		ctx.SetStatusCode(fastHttp.StatusNotFound)
 		ctx.SetBodyString("File not found")
 		return
 	}
-}
-func DownloadFile(ctx *fastHttp.RequestCtx) {
-	fileName := ctx.UserValue("id").(string)
-	handleDownloadFile(ctx, fileName)
 }
 func update(ctx *fastHttp.RequestCtx) {
 	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
