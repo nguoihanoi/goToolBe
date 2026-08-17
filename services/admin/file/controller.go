@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"image"
+	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
 	"io"
 	"log"
 	"net/http"
@@ -22,6 +25,7 @@ import (
 	fastHttp "github.com/valyala/fasthttp"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
+	_ "golang.org/x/image/webp"
 )
 
 var storageDir string
