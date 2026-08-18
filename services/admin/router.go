@@ -33,6 +33,7 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	router.GET("/image/:date/:id", file.ViewImage)
 	router.POST("/api/v1/file/upload", file.UploadFile)
 	router.GET("/api/v1/language", language.Language)
+	router.GET("/api/v1/language/group", language.Group)
 	router.GET("/api/v1/customer", customer.Customer)
 	router.GET("/api/v1/customer/group", customer.CustomerGroup)
 	router.GET("/api/v1/permission", permission.Permssion)
