@@ -30,7 +30,7 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260727103103-eab92e6e930e // indirect
 	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260815032648-97f525bcf3b4 // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260817035602-27ded19f563b // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818154917-0de4589f8ee6 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9 // indirect
 	github.com/redis/go-redis/v9 v9.21.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect

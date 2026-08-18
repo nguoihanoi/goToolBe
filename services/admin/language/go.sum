@@ -72,6 +72,14 @@ github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260812161841-5
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260812161841-57a6db14d7f0/go.mod h1:LLo88+R/GMpB1Sc/nn15ueVsMjpFdC9jfNrAfThKxI8=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260817035602-27ded19f563b h1:8vaUeLtU5FiegvEWXQIt/nRyRN8E31o7Dj7LbD1U1+g=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260817035602-27ded19f563b/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818090239-2807b175863e h1:0iKrcvsd0SOgU1t+EK4nA6U0llLunOw102Eq9B8PAyw=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818090239-2807b175863e/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818152422-7ff216ec6927 h1:TpasoNTYn4h6/YpEUA4X4EMDpncFPifuhuwrGqyKEzk=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818152422-7ff216ec6927/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818154328-8ae6b37c2d35 h1:8xhc+cUnOgDy440bffemonlHxNvZ03AEq0hupuvFRvg=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818154328-8ae6b37c2d35/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818154917-0de4589f8ee6 h1:9+RmGiOtJCt14kc26uiJnESwHAXukWcngypuNUmdTQM=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818154917-0de4589f8ee6/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9 h1:Q+bFno0q2AVPp4EbUFX5i9mEo0M4p4dAATkJzz3Ngms=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/redis/go-redis/v9 v9.21.0 h1:FPBE4hhbAke+TLmcY3WkpbDffJEomdqPn3HYiqAtL9E=
