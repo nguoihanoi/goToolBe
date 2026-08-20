@@ -3,10 +3,10 @@ module github.com/nguoihanoi/goToolBe/services/admin/customer
 go 1.25.0
 
 require (
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260807155829-4b89fb92fd68
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260818161833-6e418b97eb99
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92fd68
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb92fd68
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816140757-dc38d7812fd3
 	github.com/valyala/fasthttp v1.73.0

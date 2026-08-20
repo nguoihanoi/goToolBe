@@ -11,37 +11,41 @@ import (
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
+var response *libUtilities.ResponseClass
+
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	languageModel.InitModel(inDb, inRedisClient)
 	permissionModel.InitModel(inDb, inRedisClient)
+	response = libUtilities.Response(inRedisClient, "codes")
 }
 
 func search(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
+	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchPermissionTypeInput(ctx)
 	if status {
+		inLangCode := libUtilities.GetLangCode(ctx)
 		filter := bSon.M{"delete": 0}
 		inSortOrder := bSon.D{{Key: "delete", Value: 1}, {Key: "order", Value: 1}}
 		if regRequest.Key != "" {
 			regexValue := bSon.D{{Key: "$regex", Value: regRequest.Key}, {Key: "$options", Value: "i"}}
 			filter["$or"] = bSon.A{
-				bSon.D{{Key: "name." + regRequest.LangCode, Value: regexValue}},
+				bSon.D{{Key: "name." + inLangCode, Value: regexValue}},
 			}
 		}
-		inSortOrder = append(inSortOrder, bSon.E{Key: "name." + regRequest.LangCode, Value: 1})
+		inSortOrder = append(inSortOrder, bSon.E{Key: "name." + inLangCode, Value: 1})
 		results, total := permissionModel.SearchTypes(filter, inSortOrder, regRequest.Page, regRequest.Limit)
 		if total > 0 {
 			resp.Status = true
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 
 func create(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	resp := response.GetOutput(false, "Create false!", 206)
 	regRequest, status := ValidateCreateInput(ctx)
 	if status {
 		result := permissionModel.CreateType(permissionModel.PermissionType{
@@ -53,11 +57,11 @@ func create(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Create success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func update(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
 		updateOption := bSon.M{"name": regRequest.Name, "order": regRequest.Order}
@@ -66,11 +70,11 @@ func update(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Update success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func delete(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	resp := response.GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteInput(ctx)
 	if status {
 		result := permissionModel.DeleteType(regRequest.Id)
@@ -78,7 +82,7 @@ func delete(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Delete success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 

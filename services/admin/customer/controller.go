@@ -10,18 +10,22 @@ import (
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
+var response *libUtilities.ResponseClass
+
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	customerModel.InitModel(inDb, inRedisClient, inJwtToken)
+	response = libUtilities.Response(inRedisClient, "codes")
 }
 
 func searchCustomerGroup(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
+	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchCustomerGroupInput(ctx)
 	if status {
+		inLangCode := libUtilities.GetLangCode(ctx)
 		filter := bSon.M{"delete": 0}
 		if regRequest.Key != "" {
-			filter["name."+regRequest.LangCode] = bSon.D{{Key: "$regex", Value: regRequest.Key}, {Key: "$options", Value: "i"}}
+			filter["name."+inLangCode] = bSon.D{{Key: "$regex", Value: regRequest.Key}, {Key: "$options", Value: "i"}}
 		}
 		inSortOrder := bSon.D{{Key: "delete", Value: 1}}
 		inSortOrder = append(inSortOrder, bSon.E{Key: "first_name", Value: 1})
@@ -32,12 +36,12 @@ func searchCustomerGroup(ctx *fastHttp.RequestCtx) {
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 
 func searchCustomer(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
+	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchCustomerInput(ctx)
 	if status {
 		filter := bSon.M{"delete": 0}
@@ -62,7 +66,7 @@ func searchCustomer(ctx *fastHttp.RequestCtx) {
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 

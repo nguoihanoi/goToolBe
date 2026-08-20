@@ -32,10 +32,10 @@ func ValidateLoginInput(ctx *fastHttp.RequestCtx) (userDetail userModel.User, re
 		if userDetail.ID != "" {
 			status = true
 		} else {
-			libUtilities.Response().SendError(ctx, "This email does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This email does not exist in the system.", nil, 206)
 		}
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 		status = false
 	})
 	return userDetail, regRequest, status
@@ -53,10 +53,10 @@ func ValidateCustomerLoginInput(ctx *fastHttp.RequestCtx) (customerDetail custom
 		if customerDetail.ID != "" {
 			status = true
 		} else {
-			libUtilities.Response().SendError(ctx, "This email does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This email does not exist in the system.", nil, 206)
 		}
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 		status = false
 	})
 	return customerDetail, regRequest, status
@@ -74,12 +74,12 @@ func ValidateRegisterInput(ctx *fastHttp.RequestCtx) (regRequest CustomerRegistr
 		status = false
 		customerDetail := customerModel.GetCustomerByEmail(regRequest.Email, "")
 		if customerDetail.ID != "" {
-			libUtilities.Response().SendError(ctx, "This email is registered in the system.", nil, 206)
+			response.SendError(ctx, "This email is registered in the system.", nil, 206)
 		} else {
 			status = true
 		}
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }

@@ -10,13 +10,16 @@ import (
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
+var response *libUtilities.ResponseClass
+
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	languageModel.InitModel(inDb, inRedisClient)
+	response = libUtilities.Response(inRedisClient, "codes")
 }
 
 func search(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
+	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchInput(ctx)
 	if status {
 		filter := bSon.M{"delete": 0}
@@ -35,12 +38,12 @@ func search(ctx *fastHttp.RequestCtx) {
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 
 func create(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	resp := response.GetOutput(false, "Create false!", 206)
 	regRequest, status := ValidateCreateInput(ctx)
 	if status {
 		result := languageModel.Create(languageModel.Language{
@@ -55,12 +58,12 @@ func create(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Create success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 
 func update(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
 		updateOption := bSon.M{"name": regRequest.Name, "code": regRequest.Code, "image": regRequest.Image, "order": regRequest.Order, "status": regRequest.Status}
@@ -69,11 +72,11 @@ func update(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Update success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func delete(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	resp := response.GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteInput(ctx)
 	if status {
 		result := languageModel.Delete(regRequest.Id)
@@ -81,15 +84,15 @@ func delete(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Delete success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 
 func gets(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(true, "Get success!", 200)
+	resp := response.GetOutput(true, "Get success!", 200)
 	results := languageModel.Gets()
 	resp.Data = results
-	libUtilities.Response().SendOutput(ctx, resp)
+	response.SendOutput(ctx, resp)
 }
 
 type CommandHandler func(ctx *fastHttp.RequestCtx)

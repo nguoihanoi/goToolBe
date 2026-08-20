@@ -17,7 +17,6 @@ type CreateInput struct {
 	LastName    string `bson:"last_name" json:"last_name"`
 	Password    string `bson:"password" json:"password"`
 	UserId      string `validate:"required" json:"user_id"`
-	LangCode    string `validate:"" json:"lang_code"`
 }
 
 func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, status bool) {
@@ -27,9 +26,6 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg              sync.WaitGroup
@@ -50,16 +46,16 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if userOtherDetail.ID != "" {
-			libUtilities.Response().SendError(ctx, "This email address has already been registered on the system.", nil, 206)
+			response.SendError(ctx, "This email address has already been registered on the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }
@@ -71,7 +67,6 @@ type UpdateInput struct {
 	FirstName   string `bson:"first_name" json:"first_name"`
 	LastName    string `bson:"last_name" json:"last_name"`
 	UserId      string `validate:"required" json:"user_id"`
-	LangCode    string `validate:"" json:"lang_code"`
 }
 
 func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, status bool) {
@@ -81,9 +76,6 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg              sync.WaitGroup
@@ -109,28 +101,27 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if oldUserDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This account does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This account does not exist in the system.", nil, 206)
 			return
 		}
 		if userOtherDetail.ID != "" {
-			libUtilities.Response().SendError(ctx, "This email address has already been registered on the system.", nil, 206)
+			response.SendError(ctx, "This email address has already been registered on the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }
 
 type DeleteInput struct {
-	ID       string `bson:"_id" json:"_id"`
-	UserId   string `validate:"required" json:"user_id"`
-	LangCode string `validate:"" json:"lang_code"`
+	ID     string `bson:"_id" json:"_id"`
+	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, status bool) {
@@ -140,9 +131,6 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg            sync.WaitGroup
@@ -163,16 +151,16 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if oldUserDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This account does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This account does not exist in the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }
@@ -186,9 +174,6 @@ func ValidateActiveInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
-		}
 		var (
 			wg         sync.WaitGroup
 			userDetail userModel.User
@@ -207,16 +192,16 @@ func ValidateActiveInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if oldUserDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This account does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This account does not exist in the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return oldUserDetail, status
 }
@@ -224,7 +209,6 @@ func ValidateActiveInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User
 type UpdatePasswordInput struct {
 	UserId   string `validate:"required" json:"user_id"`
 	Password string `validate:"required" json:"password"`
-	LangCode string `validate:"" json:"lang_code"`
 }
 
 func ValidateUpdatePasswordInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User, regRequest UpdatePasswordInput, status bool) {
@@ -235,17 +219,14 @@ func ValidateUpdatePasswordInput(ctx *fastHttp.RequestCtx) (oldUserDetail userMo
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
-		}
 		oldUserDetail = userModel.GetUserById(regRequest.UserId, true)
 		if oldUserDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This account does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This account does not exist in the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return oldUserDetail, regRequest, status
 }
@@ -254,7 +235,6 @@ type UpdatePasswordByIdInput struct {
 	ID       string `bson:"_id" json:"_id"`
 	UserId   string `validate:"required" json:"user_id"`
 	Password string `validate:"required" json:"password"`
-	LangCode string `validate:"" json:"lang_code"`
 }
 
 func ValidateUpdatePasswordByIdInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User, regRequest UpdatePasswordByIdInput, status bool) {
@@ -264,9 +244,6 @@ func ValidateUpdatePasswordByIdInput(ctx *fastHttp.RequestCtx) (oldUserDetail us
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg         sync.WaitGroup
@@ -286,16 +263,16 @@ func ValidateUpdatePasswordByIdInput(ctx *fastHttp.RequestCtx) (oldUserDetail us
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if oldUserDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This account does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This account does not exist in the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return oldUserDetail, regRequest, status
 }
@@ -306,7 +283,6 @@ type SearchUserInput struct {
 	Page          int64  `validate:"min=1" json:"page"`
 	Limit         int64  `validate:"min=0" json:"limit"`
 	UserId        string `validate:"required" json:"user_id"`
-	LangCode      string `validate:"" json:"lang_code"`
 }
 
 func ValidateSearchUserInput(ctx *fastHttp.RequestCtx) (regRequest SearchUserInput, status bool) {
@@ -315,9 +291,6 @@ func ValidateSearchUserInput(ctx *fastHttp.RequestCtx) (regRequest SearchUserInp
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg                sync.WaitGroup
@@ -345,17 +318,17 @@ func ValidateSearchUserInput(ctx *fastHttp.RequestCtx) (regRequest SearchUserInp
 			userDetail.ID = ""
 		}
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if hasAccountTypeId && accountTypeDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This account type information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This account type information does not exist in the system.", nil, 206)
 			return
 		}
 
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 
 	return regRequest, status

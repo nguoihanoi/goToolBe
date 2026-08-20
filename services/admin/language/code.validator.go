@@ -11,12 +11,11 @@ import (
 )
 
 type CreateCodeInput struct {
-	Name     string            `validate:"required" json:"name"`
-	Value    map[string]string `validate:"required" json:"value"`
-	Code     string            `validate:"required" json:"code"`
-	Type     int               `validate:"required" json:"type"`
-	UserId   string            `validate:"required" json:"user_id"`
-	LangCode string            `validate:"" json:"lang_code"`
+	Name   string            `validate:"required" json:"name"`
+	Value  map[string]string `validate:"required" json:"value"`
+	Code   string            `validate:"required" json:"code"`
+	Type   int               `validate:"required" json:"type"`
+	UserId string            `validate:"required" json:"user_id"`
 }
 
 func ValidateCreateCodeInput(ctx *fastHttp.RequestCtx) (regRequest CreateCodeInput, groupId string, status bool) {
@@ -26,9 +25,6 @@ func ValidateCreateCodeInput(ctx *fastHttp.RequestCtx) (regRequest CreateCodeInp
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg               sync.WaitGroup
@@ -65,31 +61,30 @@ func ValidateCreateCodeInput(ctx *fastHttp.RequestCtx) (regRequest CreateCodeInp
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if otherCodeDetail.ID != "" {
-			libUtilities.Response().SendError(ctx, "The lang code has already been used.", nil, 206)
+			response.SendError(ctx, "The lang code has already been used.", nil, 206)
 		}
 		switch statusValidate {
 		case 1, 2:
-			libUtilities.Response().SendError(ctx, "Invalid input data!", resultValidate, 206)
+			response.SendError(ctx, "Invalid input data!", resultValidate, 206)
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, groupId, status
 }
 
 type UpdateCodeInput struct {
-	Id       string            `validate:"required" json:"_id"`
-	Name     string            `validate:"required" json:"name"`
-	Value    map[string]string `validate:"required" json:"value"`
-	Code     string            `validate:"required" json:"code"`
-	Type     int               `validate:"required" json:"type"`
-	UserId   string            `validate:"required" json:"user_id"`
-	LangCode string            `validate:"" json:"lang_code"`
+	Id     string            `validate:"required" json:"_id"`
+	Name   string            `validate:"required" json:"name"`
+	Value  map[string]string `validate:"required" json:"value"`
+	Code   string            `validate:"required" json:"code"`
+	Type   int               `validate:"required" json:"type"`
+	UserId string            `validate:"required" json:"user_id"`
 }
 
 func ValidateUpdateCodeInput(ctx *fastHttp.RequestCtx) (regRequest UpdateCodeInput, groupId string, status bool) {
@@ -99,9 +94,6 @@ func ValidateUpdateCodeInput(ctx *fastHttp.RequestCtx) (regRequest UpdateCodeInp
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg               sync.WaitGroup
@@ -143,30 +135,29 @@ func ValidateUpdateCodeInput(ctx *fastHttp.RequestCtx) (regRequest UpdateCodeInp
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if otherCodeDetail.ID != "" {
-			libUtilities.Response().SendError(ctx, "The code has already been used.", nil, 206)
+			response.SendError(ctx, "The code has already been used.", nil, 206)
 		}
 		if codeDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This code information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This code information does not exist in the system.", nil, 206)
 		}
 		switch statusValidate {
 		case 1, 2:
-			libUtilities.Response().SendError(ctx, "Invalid input data!", resultValidate, 206)
+			response.SendError(ctx, "Invalid input data!", resultValidate, 206)
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, groupId, status
 }
 
 type DeleteCodeInput struct {
-	Id       string `validate:"required" json:"_id"`
-	UserId   string `validate:"required" json:"user_id"`
-	LangCode string `validate:"" json:"lang_code"`
+	Id     string `validate:"required" json:"_id"`
+	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateDeleteCodeInput(ctx *fastHttp.RequestCtx) (regRequest DeleteCodeInput, status bool) {
@@ -176,9 +167,6 @@ func ValidateDeleteCodeInput(ctx *fastHttp.RequestCtx) (regRequest DeleteCodeInp
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg          sync.WaitGroup
@@ -199,27 +187,26 @@ func ValidateDeleteCodeInput(ctx *fastHttp.RequestCtx) (regRequest DeleteCodeInp
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if groupDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This group information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This group information does not exist in the system.", nil, 206)
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }
 
 type SearchCodeInput struct {
-	Key      string `validate:"" json:"key"`
-	Type     int    `validate:"min=0" json:"type"`
-	GroupId  string `validate:"" json:"group_id"`
-	Page     int64  `validate:"min=1" json:"page"`
-	Limit    int64  `validate:"min=0" json:"limit"`
-	UserId   string `validate:"required" json:"user_id"`
-	LangCode string `validate:"" json:"lang_code"`
+	Key     string `validate:"" json:"key"`
+	Type    int    `validate:"min=0" json:"type"`
+	GroupId string `validate:"" json:"group_id"`
+	Page    int64  `validate:"min=1" json:"page"`
+	Limit   int64  `validate:"min=0" json:"limit"`
+	UserId  string `validate:"required" json:"user_id"`
 }
 
 func ValidateSearchCodeInput(ctx *fastHttp.RequestCtx) (regRequest SearchCodeInput, status bool) {
@@ -229,9 +216,6 @@ func ValidateSearchCodeInput(ctx *fastHttp.RequestCtx) (regRequest SearchCodeInp
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg          sync.WaitGroup
@@ -259,15 +243,15 @@ func ValidateSearchCodeInput(ctx *fastHttp.RequestCtx) (regRequest SearchCodeInp
 		}
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if hasGroupID && groupDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This group information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This group information does not exist in the system.", nil, 206)
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }

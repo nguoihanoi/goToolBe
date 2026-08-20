@@ -11,11 +11,10 @@ import (
 )
 
 type SearchInput struct {
-	Key      string `validate:"" json:"key"`
-	Page     int64  `validate:"min=1" json:"page"`
-	Limit    int64  `validate:"min=0" json:"limit"`
-	UserId   string `validate:"required" json:"user_id"`
-	LangCode string `validate:"" json:"lang_code"`
+	Key    string `validate:"" json:"key"`
+	Page   int64  `validate:"min=1" json:"page"`
+	Limit  int64  `validate:"min=0" json:"limit"`
+	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateSearchCustomerGroupInput(ctx *fastHttp.RequestCtx) (regRequest SearchInput, status bool) {
@@ -26,31 +25,27 @@ func ValidateSearchCustomerGroupInput(ctx *fastHttp.RequestCtx) (regRequest Sear
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
-		}
 		userDetail := userModel.GetUserById(regRequest.UserId, true)
 		if userDetail.AccountType != "1" {
 			userDetail.ID = ""
 		}
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }
 
 type SearchCustomerInput struct {
-	Key      string `validate:"" json:"key"`
-	GroupID  string `validate:"" json:"group_id"`
-	Page     int64  `validate:"min=1" json:"page"`
-	Limit    int64  `validate:"min=0" json:"limit"`
-	UserId   string `validate:"required" json:"user_id"`
-	LangCode string `validate:"" json:"lang_code"`
+	Key     string `validate:"" json:"key"`
+	GroupID string `validate:"" json:"group_id"`
+	Page    int64  `validate:"min=1" json:"page"`
+	Limit   int64  `validate:"min=0" json:"limit"`
+	UserId  string `validate:"required" json:"user_id"`
 }
 
 func ValidateSearchCustomerInput(ctx *fastHttp.RequestCtx) (regRequest SearchCustomerInput, status bool) {
@@ -60,9 +55,6 @@ func ValidateSearchCustomerInput(ctx *fastHttp.RequestCtx) (regRequest SearchCus
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg          sync.WaitGroup
@@ -96,16 +88,16 @@ func ValidateSearchCustomerInput(ctx *fastHttp.RequestCtx) (regRequest SearchCus
 		}
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if hasGroupID && groupDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This group's information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This group's information does not exist in the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }

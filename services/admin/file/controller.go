@@ -28,34 +28,37 @@ import (
 )
 
 var storageDir string
+var response *libUtilities.ResponseClass
 
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string, inFolder string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	languageModel.InitModel(inDb, inRedisClient)
 	fileModel.InitModel(inDb, inRedisClient)
 	storageDir = inFolder
+	response = libUtilities.Response(inRedisClient, "codes")
 }
 
 func search(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
+	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchFileInput(ctx)
 	if status {
+		inLangCode := libUtilities.GetLangCode(ctx)
 		filter := bSon.M{"delete": 0}
 		inSortOrder := bSon.D{{Key: "delete", Value: 1}, {Key: "order", Value: 1}}
 		if regRequest.Key != "" {
 			regexValue := bSon.D{{Key: "$regex", Value: regRequest.Key}, {Key: "$options", Value: "i"}}
 			filter["$or"] = bSon.A{
-				bSon.D{{Key: "name." + regRequest.LangCode, Value: regexValue}},
+				bSon.D{{Key: "name." + inLangCode, Value: regexValue}},
 			}
 		}
-		inSortOrder = append(inSortOrder, bSon.E{Key: "name." + regRequest.LangCode, Value: 1})
+		inSortOrder = append(inSortOrder, bSon.E{Key: "name." + inLangCode, Value: 1})
 		results, total := fileModel.Search(filter, inSortOrder, regRequest.Page, regRequest.Limit)
 		if total > 0 {
 			resp.Status = true
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func getFileType(filename string) string {
@@ -67,23 +70,23 @@ func getFileType(filename string) string {
 	return strings.ToLower(ext)
 }
 func UploadFile(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Upload false!", 206)
+	resp := response.GetOutput(false, "Upload false!", 206)
 	// Process multipart form
 	form, err := ctx.MultipartForm()
 	if err != nil {
-		libUtilities.Response().SendError(ctx, "Failed to parse form.", nil, 206)
+		response.SendError(ctx, "Failed to parse form.", nil, 206)
 		return
 	}
 	// Get uploaded file from form
 	fileHeaders := form.File["file"]
 	if len(fileHeaders) == 0 {
-		libUtilities.Response().SendError(ctx, "No file uploaded.", nil, 206)
+		response.SendError(ctx, "No file uploaded.", nil, 206)
 		return
 	}
 	fileHeader := fileHeaders[0]
 	file, err := fileHeader.Open()
 	if err != nil {
-		libUtilities.Response().SendError(ctx, "Failed to open uploaded file.", nil, 206)
+		response.SendError(ctx, "Failed to open uploaded file.", nil, 206)
 		return
 	}
 	defer file.Close()
@@ -126,7 +129,7 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	localDir := storageDir + "/" + newFolderName
 	// Ensure uploads directory exists
 	if err := os.MkdirAll(localDir, 0755); err != nil {
-		libUtilities.Response().SendError(ctx, "Failed to create upload1s directory.", nil, 206)
+		response.SendError(ctx, "Failed to create upload1s directory.", nil, 206)
 		return
 	}
 	localFilePath := fmt.Sprintf("%s/%s%s", localDir, fileMetadata.ID, fileExt)
@@ -134,18 +137,18 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 	// Save file to local path
 	dst, err := os.Create(localFilePath)
 	if err != nil {
-		libUtilities.Response().SendError(ctx, "Failed to create local file.", nil, 206)
+		response.SendError(ctx, "Failed to create local file.", nil, 206)
 		return
 	}
 	defer dst.Close()
 	// Reset file position to beginning
 	if _, err = file.Seek(0, 0); err != nil {
-		libUtilities.Response().SendError(ctx, "Failed to reset file position.", nil, 206)
+		response.SendError(ctx, "Failed to reset file position.", nil, 206)
 		return
 	}
 	// Copy file content to destination
 	if _, err = io.Copy(dst, file); err != nil {
-		libUtilities.Response().SendError(ctx, "Failed to save file locally.", nil, 206)
+		response.SendError(ctx, "Failed to save file locally.", nil, 206)
 		return
 	}
 	// Parse description and tags if provided
@@ -169,7 +172,7 @@ func UploadFile(ctx *fastHttp.RequestCtx) {
 			"link": libUtilities.Request().GetBaseURL(ctx, "image/"+fileMetadata.S3Key),
 		}
 	}
-	libUtilities.Response().SendOutput(ctx, resp)
+	response.SendOutput(ctx, resp)
 }
 func DownloadFile(ctx *fastHttp.RequestCtx) {
 	fileName := ctx.UserValue("id").(string)
@@ -222,7 +225,7 @@ func ViewImage(ctx *fastHttp.RequestCtx) {
 	}
 }
 func update(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
 		updateOption := bSon.M{"name": regRequest.Name, "order": regRequest.Order}
@@ -231,12 +234,12 @@ func update(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Update success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 
 func delete(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	resp := response.GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteInput(ctx)
 	if status {
 		result := fileModel.Delete(regRequest.Id)
@@ -244,7 +247,7 @@ func delete(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Delete success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 

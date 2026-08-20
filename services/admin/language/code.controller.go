@@ -1,14 +1,13 @@
 package language
 
 import (
-	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
 	languageModel "github.com/nguoihanoi/golang_shared/warehouses/languages"
 	fastHttp "github.com/valyala/fasthttp"
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
 func searchCode(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
+	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchCodeInput(ctx)
 	if status {
 		filter := bSon.M{"delete": 0}
@@ -32,11 +31,11 @@ func searchCode(ctx *fastHttp.RequestCtx) {
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func createCode(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	resp := response.GetOutput(false, "Create false!", 206)
 	regRequest, groupId, status := ValidateCreateCodeInput(ctx)
 	if status {
 		result := languageModel.CreateCode(languageModel.LanguageCode{
@@ -50,11 +49,11 @@ func createCode(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Create success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func updateCode(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, groupId, status := ValidateUpdateCodeInput(ctx)
 	if status {
 		updateOption := bSon.M{"name": regRequest.Name, "value": regRequest.Value, "type": regRequest.Type, "group_id": groupId}
@@ -63,11 +62,11 @@ func updateCode(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Update success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func deleteCode(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	resp := response.GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteCodeInput(ctx)
 	if status {
 		result := languageModel.DeleteCode(regRequest.Id)
@@ -75,7 +74,7 @@ func deleteCode(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Delete success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 

@@ -10,13 +10,16 @@ import (
 	bSon "go.mongodb.org/mongo-driver/v2/bson"
 )
 
+var response *libUtilities.ResponseClass
+
 func InitController(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
 	userModel.InitModel(inDb, inRedisClient, inJwtToken)
 	permissionModel.InitModel(inDb, inRedisClient)
+	response = libUtilities.Response(inRedisClient, "codes")
 }
 
 func createUser(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Create false!", 206)
+	resp := response.GetOutput(false, "Create false!", 206)
 	regRequest, status := ValidateCreateInput(ctx)
 	if status {
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, "", false)
@@ -33,11 +36,11 @@ func createUser(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Create success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func updateUser(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Update false!", 206)
+	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
 		updateOption := bSon.M{
@@ -51,11 +54,11 @@ func updateUser(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Update success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func deleteUser(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Delete false!", 206)
+	resp := response.GetOutput(false, "Delete false!", 206)
 	regRequest, status := ValidateDeleteInput(ctx)
 	if status {
 		result := userModel.DeleteUser(regRequest.ID)
@@ -63,11 +66,11 @@ func deleteUser(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Delete success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func activeUser(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Active false!", 206)
+	resp := response.GetOutput(false, "Active false!", 206)
 	userDetail, status := ValidateActiveInput(ctx)
 	if status {
 		updateOption := bSon.M{"is_active": true}
@@ -79,11 +82,11 @@ func activeUser(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Active success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func updatePassword(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Active false!", 206)
+	resp := response.GetOutput(false, "Active false!", 206)
 	userDetail, regRequest, status := ValidateUpdatePasswordInput(ctx)
 	if status {
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
@@ -93,11 +96,11 @@ func updatePassword(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Active success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func updatePasswordById(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Active false!", 206)
+	resp := response.GetOutput(false, "Active false!", 206)
 	userDetail, regRequest, status := ValidateUpdatePasswordByIdInput(ctx)
 	if status {
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
@@ -107,11 +110,11 @@ func updatePasswordById(ctx *fastHttp.RequestCtx) {
 			resp.Status = true
 			resp.Message = "Active success!"
 		}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 func searchUser(ctx *fastHttp.RequestCtx) {
-	resp := libUtilities.Response().GetOutput(false, "Search false!", 206)
+	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchUserInput(ctx)
 	if status {
 		filter := bSon.M{"delete": 0}
@@ -136,7 +139,7 @@ func searchUser(ctx *fastHttp.RequestCtx) {
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		libUtilities.Response().SendOutput(ctx, resp)
+		response.SendOutput(ctx, resp)
 	}
 }
 

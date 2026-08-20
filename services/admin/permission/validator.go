@@ -17,7 +17,6 @@ type CreateInput struct {
 	PermissionTypeID string            `validate:"required" json:"type_id"`
 	Order            int               `validate:"min=1" json:"order"`
 	UserId           string            `validate:"required" json:"user_id"`
-	LangCode         string            `validate:"" json:"lang_code"`
 }
 
 func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, status bool) {
@@ -27,9 +26,6 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg               sync.WaitGroup
@@ -62,25 +58,25 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if permissionDetail.ID != "" {
-			libUtilities.Response().SendError(ctx, "This permission code already exists in the system.", nil, 206)
+			response.SendError(ctx, "This permission code already exists in the system.", nil, 206)
 			return
 		}
 		if typeDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This permission type information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This permission type information does not exist in the system.", nil, 206)
 			return
 		}
 		switch statusValidate {
 		case 1, 2:
-			libUtilities.Response().SendError(ctx, "Invalid input data!", resultValidate, 206)
+			response.SendError(ctx, "Invalid input data!", resultValidate, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }
@@ -92,7 +88,6 @@ type UpdateInput struct {
 	PermissionTypeID string            `validate:"required" json:"type_id"`
 	Order            int               `validate:"min=1" json:"order"`
 	UserId           string            `validate:"required" json:"user_id"`
-	LangCode         string            `validate:"" json:"lang_code"`
 }
 
 func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, status bool) {
@@ -103,9 +98,6 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		// 2. Tối ưu xử lý song song 2 query độc lập
 		var (
@@ -144,39 +136,38 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if permissionOtherDetail.ID != "" {
-			libUtilities.Response().SendError(ctx, "This permission code already exists in the system.", nil, 206)
+			response.SendError(ctx, "This permission code already exists in the system.", nil, 206)
 			return
 		}
 		// 3. Kiểm tra kết quả thu được
 		if permissionDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This permission information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This permission information does not exist in the system.", nil, 206)
 			return
 		}
 		if typeDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This permission type information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This permission type information does not exist in the system.", nil, 206)
 			return
 		}
 		switch statusValidate {
 		case 1, 2:
-			libUtilities.Response().SendError(ctx, "Invalid input data!", resultValidate, 206)
+			response.SendError(ctx, "Invalid input data!", resultValidate, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 
 	return regRequest, status
 }
 
 type DeleteInput struct {
-	ID       string `validate:"required" json:"_id"`
-	UserId   string `validate:"required" json:"user_id"`
-	LangCode string `validate:"" json:"lang_code"`
+	ID     string `validate:"required" json:"_id"`
+	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, status bool) {
@@ -186,9 +177,6 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg               sync.WaitGroup
@@ -209,27 +197,26 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		}()
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if permissionDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This permission information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This permission information does not exist in the system.", nil, 206)
 			return
 		}
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 	return regRequest, status
 }
 
 type SearchPermissionInput struct {
-	Key      string `validate:"" json:"key"`
-	TypeId   string `validate:"" json:"type_id"`
-	Page     int64  `validate:"min=1" json:"page"`
-	Limit    int64  `validate:"min=0" json:"limit"`
-	UserId   string `validate:"required" json:"user_id"`
-	LangCode string `validate:"" json:"lang_code"`
+	Key    string `validate:"" json:"key"`
+	TypeId string `validate:"" json:"type_id"`
+	Page   int64  `validate:"min=1" json:"page"`
+	Limit  int64  `validate:"min=0" json:"limit"`
+	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateSearchPermissionInput(ctx *fastHttp.RequestCtx) (regRequest SearchPermissionInput, status bool) {
@@ -239,9 +226,6 @@ func ValidateSearchPermissionInput(ctx *fastHttp.RequestCtx) (regRequest SearchP
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
-		}
-		if regRequest.LangCode == "" {
-			regRequest.LangCode = "vi"
 		}
 		var (
 			wg         sync.WaitGroup
@@ -270,17 +254,17 @@ func ValidateSearchPermissionInput(ctx *fastHttp.RequestCtx) (regRequest SearchP
 		}
 		wg.Wait()
 		if userDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
 			return
 		}
 		if hasTypeId && typeDetail.ID == "" {
-			libUtilities.Response().SendError(ctx, "This permission type information does not exist in the system.", nil, 206)
+			response.SendError(ctx, "This permission type information does not exist in the system.", nil, 206)
 			return
 		}
 
 		status = true
 	}).Catch(func(e libProcess.E) {
-		libUtilities.Response().SendError(ctx, "Invalid input data!", e, 206)
+		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 
 	return regRequest, status

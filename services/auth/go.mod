@@ -5,12 +5,12 @@ go 1.25.0
 require (
 	github.com/buaazp/fasthttprouter v0.1.1
 	github.com/joho/godotenv v1.5.1
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260731153403-a14f9a494cb2
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260818161833-6e418b97eb99
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731153403-a14f9a494cb2
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260731153403-a14f9a494cb2
 	github.com/nguoihanoi/golang_shared/libs/middleware v0.0.0-20260807095719-2d4c87f19a91
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260731153403-a14f9a494cb2
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260731153403-a14f9a494cb2
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260731153403-a14f9a494cb2
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260731153403-a14f9a494cb2
 	github.com/redis/go-redis/v9 v9.21.0

@@ -57,6 +57,8 @@ github.com/muesli/termenv v0.16.0/go.mod h1:ZRfOIKPFDYQoDFF4Olj7/QJbW60Ol/kL1pU3
 github.com/nguoihanoi/golang_shared v1.0.0 h1:0qj8nH947hHNOvYKBus6zfFSNXF+yvW80TvKBf5zlOc=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260807155829-4b89fb92fd68 h1:bdJmXRzpCnffU5CSmo/IlOlm3WEVG9bjZ6HTMekQO/U=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:FeOWVOe+7JcSsZZAc5/x4tTXTs7DjyKtI8BJT28NrWg=
+github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260818161833-6e418b97eb99 h1:tZzKhW8g2z0iYlaW0r9lGogl+wOiGT8G9HzdvN6xWco=
+github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260818161833-6e418b97eb99/go.mod h1:FeOWVOe+7JcSsZZAc5/x4tTXTs7DjyKtI8BJT28NrWg=
 github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731101451-ed2b23ebe550 h1:xC4mCXJbEFM/qIvEKDzxz1pDty3Qr5hUi3SqVsv8DTo=
 github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731101451-ed2b23ebe550/go.mod h1:gghUNpZvckQOW6gJ3D/cvBt0YnSKBMkANIm1CwFLBsI=
 github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68 h1:ftZ8vmNEO6DTo+yBzySh+NAkTnOAE/AwVN9AflBfM9M=
@@ -65,6 +67,8 @@ github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92f
 github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:u8m/pOkVEnozantr7T/xc9lAfD2/AzzdZI9oPJBhqws=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb92fd68 h1:+BPzalv0w9HS3VFjSEd2obQXJGA9JVdq0GCw1lpzOjk=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:1WvId84bBKngJGPZ8e4tsson3InEOoUiIJBHCFGBm+8=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608 h1:BVoVtTVVS7/JVyvXTNiVvHF1FtKi79zLLYLgWP0hD+Q=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68 h1:uG5z7Ff5rRSbft45hCc81atmYbneNkqniddLMKzymJM=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:xL7b89+SEKgp/8RrmWmxPN2WHIYrcIq4cd1qzeo56S8=
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816140757-dc38d7812fd3 h1:2PaBODmblMTR8SHZ02IpuxpY9GL1yeWlR/6HaMLeiE4=
