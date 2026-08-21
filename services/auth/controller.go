@@ -7,6 +7,7 @@ import (
 	customerModel "github.com/nguoihanoi/golang_shared/warehouses/customers"
 	userModel "github.com/nguoihanoi/golang_shared/warehouses/users"
 	fastHttp "github.com/valyala/fasthttp"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 var response *libUtilities.ResponseClass
@@ -72,12 +73,43 @@ func register(ctx *fastHttp.RequestCtx) {
 	}
 }
 
+func updateCustomerAvatar(ctx *fastHttp.RequestCtx) {
+	resp := response.GetOutput(false, "Update false!", 206)
+	regRequest, status := ValidateUpdateAvatarInput(ctx)
+	if status {
+		resultStatus := customerModel.UpdateCustomer(regRequest.CustomerId, bson.M{"profile_picture": regRequest.Image})
+		if resultStatus {
+			resp.Status = true
+			resp.Message = "Update success!"
+		}
+		response.SendOutput(ctx, resp)
+	}
+}
+
+func updateCustomerProfile(ctx *fastHttp.RequestCtx) {
+	resp := response.GetOutput(false, "Update false!", 206)
+	regRequest, status := ValidateUpdateProfileInput(ctx)
+	if status {
+		resultStatus := customerModel.UpdateCustomer(regRequest.CustomerId, bson.M{
+			"first_name": regRequest.FirstName,
+			"last_name":  regRequest.LastName,
+		})
+		if resultStatus {
+			resp.Status = true
+			resp.Message = "Update success!"
+		}
+		response.SendOutput(ctx, resp)
+	}
+}
+
 type CommandHandler func(ctx *fastHttp.RequestCtx)
 
 // Khai báo map handler 1 lần duy nhất lúc khởi chạy app
 var customerCmdMap = map[string]CommandHandler{
-	"login":    customerLogin,
-	"register": register,
+	"login":          customerLogin,
+	"register":       register,
+	"update_avatar":  updateCustomerAvatar,
+	"update_profile": updateCustomerProfile,
 }
 
 func Customer(ctx *fastHttp.RequestCtx) {
