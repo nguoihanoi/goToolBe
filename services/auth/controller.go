@@ -51,20 +51,6 @@ func customerLogin(ctx *fastHttp.RequestCtx) {
 	}
 }
 
-func login(ctx *fastHttp.RequestCtx) {
-	resp := response.GetOutput(false, "Login false!", 206)
-	userDetail, regRequest, status := ValidateLoginInput(ctx)
-	if status {
-		_, resultStatus := userModel.Login(userDetail, regRequest.Password, false)
-		if resultStatus {
-			resp.Status = true
-			resp.Message = "Login success!"
-			resp.Data = userDetail
-		}
-		response.SendOutput(ctx, resp)
-	}
-}
-
 func register(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Register false!", 206)
 	regRequest, status := ValidateRegisterInput(ctx)
@@ -93,22 +79,7 @@ var customerCmdMap = map[string]CommandHandler{
 	"login":    customerLogin,
 	"register": register,
 }
-var authCmdMap = map[string]CommandHandler{
-	"login": login,
-}
 
-func Auth(ctx *fastHttp.RequestCtx) {
-	cmd := ctx.Request.Header.Peek("X-API-Cmd")
-
-	// Ép kiểu string ở đây nếu dùng Map, nhưng tra cứu O(1) rất nhanh
-	if handler, exists := authCmdMap[string(cmd)]; exists {
-		handler(ctx)
-		return
-	}
-
-	ctx.SetStatusCode(fastHttp.StatusBadRequest)
-	ctx.SetBodyString("Invalid or missing X-API-Cmd header")
-}
 func Customer(ctx *fastHttp.RequestCtx) {
 	cmd := ctx.Request.Header.Peek("X-API-Cmd")
 
