@@ -1,6 +1,7 @@
 package main
 
 import (
+	utilities "github.com/nguoihanoi/golang_shared/libs/utilities"
 	userModel "github.com/nguoihanoi/golang_shared/warehouses/users"
 	fastHttp "github.com/valyala/fasthttp"
 )
@@ -15,12 +16,27 @@ func login(ctx *fastHttp.RequestCtx) {
 			resp.Message = "Login success!"
 			resp.Data = userDetail
 		}
-		response.SendOutput(ctx, resp)
 	}
+	response.SendOutput(ctx, resp)
+}
+
+func me(ctx *fastHttp.RequestCtx) {
+	resp := response.GetOutput(false, "Get false!", 206)
+	userId := utilities.GetUserId(ctx)
+	if userId != "" {
+		userDetail := userModel.GetUserById(userId, true)
+		if userDetail.ID != "" {
+			resp.Status = true
+			resp.Message = "Get success!"
+			resp.Data = userDetail
+		}
+	}
+	response.SendOutput(ctx, resp)
 }
 
 var authCmdMap = map[string]CommandHandler{
 	"login": login,
+	"me":    me,
 }
 
 func Auth(ctx *fastHttp.RequestCtx) {

@@ -14,6 +14,6 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 		ctx.SetStatusCode(fastHttp.StatusOK)
 		ctx.SetBodyString("Auth service is up and running")
 	})
-	router.GET("/api/v1/auth", Auth)
+	router.POST("/api/v1/auth", Auth)
 	router.POST("/api/v1/customer", Customer)
 }

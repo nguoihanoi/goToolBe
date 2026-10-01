@@ -56,8 +56,10 @@ func main() {
 	SERVER_NAME := os.Getenv("SERVER_NAME")
 	PORT := os.Getenv("PORT")
 	// crypto
+	JWT_API_SECRET := os.Getenv("JWT_API_SECRET")
 	JWT_SECRET := os.Getenv("JWT_SECRET")
 	//PREFIX_TOKEN := os.Getenv("PREFIX_TOKEN")
+	log.Println(JWT_API_SECRET)
 
 	//Todo: init db
 	mgoDB1 := initDb(MONGO_COMMON_URI, MONGO_COMMON_DB)
@@ -69,10 +71,10 @@ func main() {
 	//Todo: init db
 	libJwt = libCrypto.JWT(JWT_SECRET)
 	Init(mainRouter, mgoDB1, redisDb1, JWT_SECRET)
-	corsMid := mdWare.Init("*", "POST, GET", JWT_SECRET)
+	corsMid := mdWare.Init("*", "POST, GET", JWT_API_SECRET)
 
-	newToken, nextTime, err := libJwt.CreateToken(`{"email":"playhard24h@gmail.com","password":"abc123!@#"}`)
-	log.Println(newToken, nextTime, err)
+	//newToken, nextTime, err := libJwt.CreateToken(`{"email":"playhard24h@gmail.com","password":"abc123!@#"}`)
+	//log.Println(newToken, nextTime, err)
 
 	//Todo: Create a custom logger
 	myLogger := log.New(log.Writer(), "FasthttpServer: ", log.LstdFlags)
