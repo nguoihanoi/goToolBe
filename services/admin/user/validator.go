@@ -16,11 +16,15 @@ type CreateInput struct {
 	FirstName   string `bson:"first_name" json:"first_name"`
 	LastName    string `bson:"last_name" json:"last_name"`
 	Password    string `bson:"password" json:"password"`
-	UserId      string `validate:"required" json:"user_id"`
 }
 
 func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
@@ -35,7 +39,7 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		wg.Add(2)
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -66,11 +70,15 @@ type UpdateInput struct {
 	Email       string `bson:"email" json:"email"`
 	FirstName   string `bson:"first_name" json:"first_name"`
 	LastName    string `bson:"last_name" json:"last_name"`
-	UserId      string `validate:"required" json:"user_id"`
 }
 
 func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
@@ -90,7 +98,7 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		}()
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -120,12 +128,16 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 }
 
 type DeleteInput struct {
-	ID     string `bson:"_id" json:"_id"`
-	UserId string `validate:"required" json:"user_id"`
+	ID string `bson:"_id" json:"_id"`
 }
 
 func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
@@ -144,7 +156,7 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		}()
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -167,6 +179,11 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 
 func ValidateActiveInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	regRequest := DeleteInput{}
 	libProcess.Try(func() {
 		//Todo: get struct input
@@ -185,7 +202,7 @@ func ValidateActiveInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User
 		}()
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -219,6 +236,11 @@ func ValidateUpdatePasswordInput(ctx *fastHttp.RequestCtx) (oldUserDetail userMo
 		if err != nil {
 			libProcess.Throw(err)
 		}
+		userId := libUtilities.GetUserId(ctx)
+		if userId == "" || userId != regRequest.UserId {
+			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+			return
+		}
 		oldUserDetail = userModel.GetUserById(regRequest.UserId, true)
 		if oldUserDetail.ID == "" {
 			response.SendError(ctx, "This account does not exist in the system.", nil, 206)
@@ -233,12 +255,16 @@ func ValidateUpdatePasswordInput(ctx *fastHttp.RequestCtx) (oldUserDetail userMo
 
 type UpdatePasswordByIdInput struct {
 	ID       string `bson:"_id" json:"_id"`
-	UserId   string `validate:"required" json:"user_id"`
 	Password string `validate:"required" json:"password"`
 }
 
 func ValidateUpdatePasswordByIdInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User, regRequest UpdatePasswordByIdInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
@@ -256,7 +282,7 @@ func ValidateUpdatePasswordByIdInput(ctx *fastHttp.RequestCtx) (oldUserDetail us
 		}()
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -282,11 +308,15 @@ type SearchUserInput struct {
 	AccountTypeId string `validate:"" json:"account_type"`
 	Page          int64  `validate:"min=1" json:"page"`
 	Limit         int64  `validate:"min=0" json:"limit"`
-	UserId        string `validate:"required" json:"user_id"`
 }
 
 func ValidateSearchUserInput(ctx *fastHttp.RequestCtx) (regRequest SearchUserInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
@@ -305,7 +335,7 @@ func ValidateSearchUserInput(ctx *fastHttp.RequestCtx) (regRequest SearchUserInp
 		}
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 		}()
 		if hasAccountTypeId {
 			go func() {

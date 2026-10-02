@@ -15,7 +15,7 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260820100812-fd8d60ed8608
-	github.com/nguoihanoi/golang_shared/libs/middleware v0.0.0-20260820100812-fd8d60ed8608
+	github.com/nguoihanoi/golang_shared/libs/middleware v0.0.0-20261001085837-9fb91920a281
 	github.com/redis/go-redis/v9 v9.22.0
 	github.com/valyala/fasthttp v1.73.0
 )
@@ -46,7 +46,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.28 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260820100812-fd8d60ed8608 // indirect
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608 // indirect
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260820100812-fd8d60ed8608 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20260820100812-fd8d60ed8608 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260820100812-fd8d60ed8608 // indirect

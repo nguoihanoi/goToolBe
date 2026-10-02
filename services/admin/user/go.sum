@@ -69,6 +69,8 @@ github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb9
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:1WvId84bBKngJGPZ8e4tsson3InEOoUiIJBHCFGBm+8=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608 h1:BVoVtTVVS7/JVyvXTNiVvHF1FtKi79zLLYLgWP0hD+Q=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281 h1:TIxm7BHSN6TLGAtIgXSI2T7mPWlOMYnsjbUK108Y3oY=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68 h1:uG5z7Ff5rRSbft45hCc81atmYbneNkqniddLMKzymJM=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:xL7b89+SEKgp/8RrmWmxPN2WHIYrcIq4cd1qzeo56S8=
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816140757-dc38d7812fd3 h1:2PaBODmblMTR8SHZ02IpuxpY9GL1yeWlR/6HaMLeiE4=

@@ -56,6 +56,7 @@ func main() {
 	SERVER_NAME := os.Getenv("SERVER_NAME")
 	PORT := os.Getenv("PORT")
 	// crypto
+	JWT_API_SECRET := os.Getenv("JWT_API_SECRET")
 	JWT_SECRET := os.Getenv("JWT_SECRET")
 	//PREFIX_TOKEN := os.Getenv("PREFIX_TOKEN")
 	// upload
@@ -71,7 +72,7 @@ func main() {
 	//Todo: init db
 	libJwt = libCrypto.JWT(JWT_SECRET)
 	Init(mainRouter, mgoDB1, redisDb1, JWT_SECRET, UPLOAD_FOLDER)
-	corsMid := mdWare.Init("*", "POST, GET", JWT_SECRET)
+	corsMid := mdWare.Init("*", "POST, GET", JWT_API_SECRET)
 
 	newToken, nextTime, err := libJwt.CreateToken(`{"email":"playhard24h@gmail.com","password":"abc123!@#"}`)
 	newToken2, nextTime2, err2 := libJwt.CreateToken(`{"customer_id":"1","user_id":"2"}`)

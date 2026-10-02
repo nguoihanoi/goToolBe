@@ -105,7 +105,7 @@ func updatePasswordById(ctx *fastHttp.RequestCtx) {
 	if status {
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
 		updateOption := bSon.M{"password_hash": PasswordHash, "password": Password}
-		result := userModel.UpdateUser(regRequest.UserId, updateOption)
+		result := userModel.UpdateUser(regRequest.ID, updateOption)
 		if result == true {
 			resp.Status = true
 			resp.Message = "Active success!"
