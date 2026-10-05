@@ -81,6 +81,8 @@ github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816140757-dc38d
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816140757-dc38d7812fd3/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816155621-0d2e03bc9921 h1:MmPmscwYousHw723leF6NZei+mka9AiMoW7ifkfbWDY=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260816155621-0d2e03bc9921/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e h1:i9j2jwmSxLK6bzSl4cRSquNq4aj3pSu1zvfUemaJJto=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/redis/go-redis/v9 v9.21.0 h1:FPBE4hhbAke+TLmcY3WkpbDffJEomdqPn3HYiqAtL9E=

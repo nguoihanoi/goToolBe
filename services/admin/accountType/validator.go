@@ -17,12 +17,15 @@ type CreateInput struct {
 	Permissions []string          `validate:"required" json:"permissions"`
 	Status      int               `validate:"min=0" json:"status"`
 	Order       int               `validate:"min=1" json:"order"`
-	UserId      string            `validate:"required" json:"user_id"`
 }
 
-func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, status bool) {
+func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, userId string, status bool) {
 	status = false
-
+	userId = libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
@@ -42,7 +45,7 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		go func() {
 			defer wg.Done()
 			defer func() { <-sem }()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -80,7 +83,7 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
 
-	return regRequest, status
+	return regRequest, userId, status
 }
 
 type UpdateInput struct {
@@ -90,11 +93,15 @@ type UpdateInput struct {
 	Permissions []string          `validate:"required" json:"permissions"`
 	Status      int               `validate:"min=0" json:"status"`
 	Order       int               `validate:"min=1" json:"order"`
-	UserId      string            `validate:"required" json:"user_id"`
 }
 
 func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
@@ -115,7 +122,7 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		go func() {
 			defer wg.Done()
 			defer func() { <-sem }()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 		}()
 		wg.Add(1)
 		sem <- struct{}{}
@@ -166,12 +173,16 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 }
 
 type DeleteInput struct {
-	Id     string `validate:"required" json:"_id"`
-	UserId string `validate:"required" json:"user_id"`
+	Id string `validate:"required" json:"_id"`
 }
 
 func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
@@ -186,7 +197,7 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		wg.Add(2)
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -212,21 +223,25 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 
 type SearchAccountTypeInput struct {
 	Key    string `validate:"" json:"key"`
-	Status int    `validate:"min=1" json:"status"`
+	Status int    `validate:"min=-1" json:"status"`
 	Page   int64  `validate:"min=1" json:"page"`
 	Limit  int64  `validate:"min=0" json:"limit"`
-	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateSearchAccountTypeInput(ctx *fastHttp.RequestCtx) (regRequest SearchAccountTypeInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		userDetail := userModel.GetUserById(regRequest.UserId, true)
+		userDetail := userModel.GetUserById(userId, true)
 		if userDetail.AccountType != "1" {
 			userDetail.ID = ""
 		}

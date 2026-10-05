@@ -6,8 +6,8 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260818161833-6e418b97eb99
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92fd68
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608
-	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807155829-4b89fb92fd68
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281
+	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e
 	github.com/valyala/fasthttp v1.73.0
 	go.mongodb.org/mongo-driver/v2 v2.8.0
 )
@@ -37,7 +37,7 @@ require (
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731101451-ed2b23ebe550 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260815033746-22d58fb55ab6 // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816155621-0d2e03bc9921 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261005042424-2224c004b48e // indirect
 	github.com/redis/go-redis/v9 v9.21.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

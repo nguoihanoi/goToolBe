@@ -16,18 +16,22 @@ type CreateInput struct {
 	Image  string `validate:"required" json:"image"`
 	Order  int    `validate:"min=1" json:"order"`
 	Status int    `validate:"min=0" json:"status"`
-	UserId string `validate:"required" json:"user_id"`
 }
 
-func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, status bool) {
+func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, userId string, status bool) {
 	status = false
+	userId = libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		userDetail := userModel.GetUserById(regRequest.UserId, true)
+		userDetail := userModel.GetUserById(userId, true)
 		if userDetail.AccountType != "1" {
 			userDetail.ID = ""
 		}
@@ -39,7 +43,7 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 	}).Catch(func(e libProcess.E) {
 		response.SendError(ctx, "Invalid input data!", e, 206)
 	})
-	return regRequest, status
+	return regRequest, userId, status
 }
 
 type UpdateInput struct {
@@ -49,11 +53,15 @@ type UpdateInput struct {
 	Image  string `validate:"required" json:"image"`
 	Order  int    `validate:"min=1" json:"order"`
 	Status int    `validate:"min=0" json:"status"`
-	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
@@ -68,7 +76,7 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 		wg.Add(2)
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -93,12 +101,16 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 }
 
 type DeleteInput struct {
-	Id     string `validate:"required" json:"_id"`
-	UserId string `validate:"required" json:"user_id"`
+	Id string `validate:"required" json:"_id"`
 }
 
 func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
@@ -113,7 +125,7 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 		wg.Add(2)
 		go func() {
 			defer wg.Done()
-			userDetail = userModel.GetUserById(regRequest.UserId, true)
+			userDetail = userModel.GetUserById(userId, true)
 			if userDetail.AccountType != "1" {
 				userDetail.ID = ""
 			}
@@ -139,20 +151,25 @@ func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, stat
 
 type SearchInput struct {
 	Key    string `validate:"" json:"key"`
+	Status int64  `validate:"min=-1,max=1" json:"status"`
 	Page   int64  `validate:"min=1" json:"page"`
 	Limit  int64  `validate:"min=0" json:"limit"`
-	UserId string `validate:"required" json:"user_id"`
 }
 
 func ValidateSearchInput(ctx *fastHttp.RequestCtx) (regRequest SearchInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		userDetail := userModel.GetUserById(regRequest.UserId, true)
+		userDetail := userModel.GetUserById(userId, true)
 		if userDetail.AccountType != "1" {
 			userDetail.ID = ""
 		}

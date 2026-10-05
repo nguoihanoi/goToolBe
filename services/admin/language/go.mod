@@ -29,9 +29,9 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731084734-f56a879327a9 // indirect
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260727103103-eab92e6e930e // indirect
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608 // indirect
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818161833-6e418b97eb99 // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e // indirect
 	github.com/redis/go-redis/v9 v9.21.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

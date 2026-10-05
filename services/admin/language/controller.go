@@ -31,6 +31,9 @@ func search(ctx *fastHttp.RequestCtx) {
 				bSon.D{{Key: "code", Value: regexValue}},
 			}
 		}
+		if regRequest.Status > -1 {
+			filter["status"] = regRequest.Status
+		}
 		inSortOrder = append(inSortOrder, bSon.E{Key: "name", Value: 1})
 		results, total := languageModel.Search(filter, inSortOrder, regRequest.Page, regRequest.Limit)
 		if total > 0 {
@@ -44,7 +47,7 @@ func search(ctx *fastHttp.RequestCtx) {
 
 func create(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Create false!", 206)
-	regRequest, status := ValidateCreateInput(ctx)
+	regRequest, userId, status := ValidateCreateInput(ctx)
 	if status {
 		result := languageModel.Create(languageModel.Language{
 			Name:     regRequest.Name,
@@ -52,7 +55,7 @@ func create(ctx *fastHttp.RequestCtx) {
 			Image:    regRequest.Image,
 			Order:    regRequest.Order,
 			Status:   regRequest.Status,
-			AuthorId: regRequest.UserId,
+			AuthorId: userId,
 		})
 		if result != "" {
 			resp.Status = true

@@ -48,7 +48,7 @@ func search(ctx *fastHttp.RequestCtx) {
 
 func create(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Create false!", 206)
-	regRequest, status := ValidateCreateInput(ctx)
+	regRequest, userId, status := ValidateCreateInput(ctx)
 	if status {
 		result := permissionModel.CreateAccountType(permissionModel.AccountType{
 			Name:        regRequest.Name,
@@ -56,7 +56,7 @@ func create(ctx *fastHttp.RequestCtx) {
 			Permissions: regRequest.Permissions,
 			Status:      regRequest.Status,
 			Order:       regRequest.Order,
-			AuthorId:    regRequest.UserId,
+			AuthorId:    userId,
 		})
 		if result != "" {
 			resp.Status = true

@@ -73,6 +73,8 @@ github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260815033746-22d58fb
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260815033746-22d58fb55ab6/go.mod h1:egj/YJ5Cb+uTJXGMTbf5GUjhop/ssWiOCuIRlmF9zDo=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608 h1:BVoVtTVVS7/JVyvXTNiVvHF1FtKi79zLLYLgWP0hD+Q=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281 h1:TIxm7BHSN6TLGAtIgXSI2T7mPWlOMYnsjbUK108Y3oY=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68 h1:uG5z7Ff5rRSbft45hCc81atmYbneNkqniddLMKzymJM=
 github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:xL7b89+SEKgp/8RrmWmxPN2WHIYrcIq4cd1qzeo56S8=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260815033746-22d58fb55ab6 h1:4pAQhzFINUngZxPO03Z8OyaOF3T2h/iCsEhHC5Vp/EE=
@@ -83,8 +85,12 @@ github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816140757
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816140757-dc38d7812fd3/go.mod h1:SR2be1SS30uQnIldm6SPi53J6enGBijXNLMGn1c95mQ=
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816155621-0d2e03bc9921 h1:7weLm9PootO89s4uEIDiUwRPQZtXedXHs/atXWeZvWg=
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260816155621-0d2e03bc9921/go.mod h1:SR2be1SS30uQnIldm6SPi53J6enGBijXNLMGn1c95mQ=
+github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261005042424-2224c004b48e h1:0EQ5WDXpNmN/8VjmhPBd6tdTfcEdefVO8IwfPAjtXjQ=
+github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261005042424-2224c004b48e/go.mod h1:SR2be1SS30uQnIldm6SPi53J6enGBijXNLMGn1c95mQ=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807155829-4b89fb92fd68 h1:Hfy5PK5m6ucOeAdq5F9Wh+c+S7DPWUXnYvdADc61ui8=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e h1:i9j2jwmSxLK6bzSl4cRSquNq4aj3pSu1zvfUemaJJto=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/redis/go-redis/v9 v9.21.0 h1:FPBE4hhbAke+TLmcY3WkpbDffJEomdqPn3HYiqAtL9E=
