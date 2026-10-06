@@ -22,27 +22,14 @@ func search(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Search false!", 206)
 	regRequest, status := ValidateSearchInput(ctx)
 	if status {
-		filter := bSon.M{"delete": 0}
-		inSortOrder := bSon.D{{Key: "delete", Value: 1}}
-		if regRequest.Key != "" {
-			regexValue := bSon.D{{Key: "$regex", Value: regRequest.Key}, {Key: "$options", Value: "i"}}
-			filter["$or"] = bSon.A{
-				bSon.D{{Key: "name", Value: regexValue}},
-				bSon.D{{Key: "code", Value: regexValue}},
-			}
-		}
-		if regRequest.Status > -1 {
-			filter["status"] = regRequest.Status
-		}
-		inSortOrder = append(inSortOrder, bSon.E{Key: "name", Value: 1})
-		results, total := languageModel.Search(filter, inSortOrder, regRequest.Page, regRequest.Limit)
+		results, total := doSearch(ctx, regRequest)
 		if total > 0 {
 			resp.Status = true
 			resp.Message = "Search success!"
 		}
 		resp.Data = map[string]any{"list": results, "total": total}
-		response.SendOutput(ctx, resp)
 	}
+	response.SendOutput(ctx, resp)
 }
 
 func create(ctx *fastHttp.RequestCtx) {

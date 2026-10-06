@@ -58,6 +58,8 @@ github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807040627-fc2f9a41
 github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807040627-fc2f9a418e47/go.mod h1:/Z+4IWAbbyTcUDVIhfGHFUKh7t175k+LCzHFofqavik=
 github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68 h1:ftZ8vmNEO6DTo+yBzySh+NAkTnOAE/AwVN9AflBfM9M=
 github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:/Z+4IWAbbyTcUDVIhfGHFUKh7t175k+LCzHFofqavik=
+github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260816155621-0d2e03bc9921 h1:oTEESprgbfIT9NR2pKe1xtU3V29Nsv1JXWtJXOF4rMA=
+github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260816155621-0d2e03bc9921/go.mod h1:/Z+4IWAbbyTcUDVIhfGHFUKh7t175k+LCzHFofqavik=
 github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260727103103-eab92e6e930e h1:5VyWIBDf819eE77rVkxtPMnQouyScv5Oh8uAyz11q1A=
 github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260727103103-eab92e6e930e/go.mod h1:u8m/pOkVEnozantr7T/xc9lAfD2/AzzdZI9oPJBhqws=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260727104710-1fe9f1bb65e7 h1:F7q5w1dhffxTonGXbt9pyYcF0qWm3Dq74V1GIX4mToE=
@@ -72,6 +74,8 @@ github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60e
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281 h1:TIxm7BHSN6TLGAtIgXSI2T7mPWlOMYnsjbUK108Y3oY=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
+github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e h1:Z4yfGjbhV7aIVicOoH5ycdFQ8m7Jtsl01U/nBXN5WXE=
+github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e/go.mod h1:o1xR/Z1RSr/4M0rVPTM4dp7UwNuMZaY8BB5uBhU2S5o=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260812154144-a330795c46f9 h1:vbkwtuyVf8FCkndnqAdw+71xgHP2fU7UHWAjViacMFo=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260812154144-a330795c46f9/go.mod h1:LLo88+R/GMpB1Sc/nn15ueVsMjpFdC9jfNrAfThKxI8=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260812160420-350618af89a4 h1:xnMXTG5PQPAk5Rvgeoq6pkMxPAuwjWoluAmrWGinQIw=
