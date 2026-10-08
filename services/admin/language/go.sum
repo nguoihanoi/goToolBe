@@ -98,6 +98,8 @@ github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818161833-6
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260818161833-6e418b97eb99/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008050151-290f5a13f31d h1:APTweYhvM7hxj29eZmJufSV5QCdcryaqBp0YYe1r200=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008050151-290f5a13f31d/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008070327-428e3c4aba34 h1:G0IC6U71LRUAmdPpggXke0EhJ4RuZ6ppri57E+YzcNU=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008070327-428e3c4aba34/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9 h1:Q+bFno0q2AVPp4EbUFX5i9mEo0M4p4dAATkJzz3Ngms=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e h1:i9j2jwmSxLK6bzSl4cRSquNq4aj3pSu1zvfUemaJJto=
