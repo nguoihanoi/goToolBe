@@ -90,6 +90,13 @@ func delete(ctx *fastHttp.RequestCtx) {
 	}
 }
 
+func gets(ctx *fastHttp.RequestCtx) {
+	resp := response.GetOutput(true, "Get success!", 200)
+	results := permissionModel.GetTypes()
+	resp.Data = results
+	response.SendOutput(ctx, resp)
+}
+
 type CommandHandler func(ctx *fastHttp.RequestCtx)
 
 var permissionTypeCmdMap = map[string]CommandHandler{
@@ -97,6 +104,7 @@ var permissionTypeCmdMap = map[string]CommandHandler{
 	"create": create,
 	"update": update,
 	"delete": delete,
+	"gets":   gets,
 }
 
 func PermssionType(ctx *fastHttp.RequestCtx) {
