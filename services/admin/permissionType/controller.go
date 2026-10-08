@@ -54,6 +54,7 @@ func create(ctx *fastHttp.RequestCtx) {
 		result := permissionModel.CreateType(permissionModel.PermissionType{
 			Name:     regRequest.Name,
 			Order:    regRequest.Order,
+			Status:   regRequest.Status,
 			AuthorId: userId,
 		})
 		if result != "" {
@@ -67,7 +68,7 @@ func update(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
-		updateOption := bSon.M{"name": regRequest.Name, "order": regRequest.Order}
+		updateOption := bSon.M{"name": regRequest.Name, "order": regRequest.Order, "status": regRequest.Status}
 		result := permissionModel.UpdateType(regRequest.Id, updateOption)
 		if result == true {
 			resp.Status = true
