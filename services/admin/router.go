@@ -38,6 +38,6 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	router.POST("/api/v1/customer", customer.Customer)
 	router.POST("/api/v1/customer/group", customer.CustomerGroup)
 	router.POST("/api/v1/permission", permission.Permssion)
-	router.POST("/api/v1/permission/type", permissionType.PermssionType)
+	router.POST("/api/v1/permissionType", permissionType.PermssionType)
 	router.POST("/api/v1/accountType", accountType.AccountType)
 }
