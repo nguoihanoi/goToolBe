@@ -87,6 +87,8 @@ github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260807155829
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:SR2be1SS30uQnIldm6SPi53J6enGBijXNLMGn1c95mQ=
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261005042424-2224c004b48e h1:0EQ5WDXpNmN/8VjmhPBd6tdTfcEdefVO8IwfPAjtXjQ=
 github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261005042424-2224c004b48e/go.mod h1:SR2be1SS30uQnIldm6SPi53J6enGBijXNLMGn1c95mQ=
+github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261009084047-63ff99aabec1 h1:TAeZS98ivFShwz113tI4gJaacRV5/+k6scxjVeFK8ZE=
+github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261009084047-63ff99aabec1/go.mod h1:SR2be1SS30uQnIldm6SPi53J6enGBijXNLMGn1c95mQ=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807155829-4b89fb92fd68 h1:Hfy5PK5m6ucOeAdq5F9Wh+c+S7DPWUXnYvdADc61ui8=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260807155829-4b89fb92fd68/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e h1:i9j2jwmSxLK6bzSl4cRSquNq4aj3pSu1zvfUemaJJto=
