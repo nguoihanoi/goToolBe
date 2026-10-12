@@ -69,7 +69,7 @@ func update(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
-		updateOption := bSon.M{"name": regRequest.Name, "type_id": regRequest.PermissionTypeID, "order": regRequest.Order}
+		updateOption := bSon.M{"name": regRequest.Name, "code": regRequest.Code, "type_id": regRequest.PermissionTypeID, "order": regRequest.Order}
 		result := permissionModel.UpdatePermission(regRequest.ID, updateOption, regRequest.PermissionTypeID)
 		if result == true {
 			resp.Status = true
