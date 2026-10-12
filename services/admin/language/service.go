@@ -96,4 +96,5 @@ func doGets(ctx *fastHttp.RequestCtx) (output []LanguageItem) {
 			ImageLink: temImageLink,
 		})
 	}
+	return output
 }
