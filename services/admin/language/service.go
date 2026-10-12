@@ -69,3 +69,31 @@ func doSearch(ctx *fastHttp.RequestCtx, regRequest SearchInput) ([]LanguageItem,
 	}
 	return output, total
 }
+
+type MiniLanguageItem struct {
+	ID        string `bson:"_id" json:"_id"`
+	Name      string `bson:"name" json:"name"`
+	Code      string `bson:"code" json:"code"`
+	Image     string `bson:"image" json:"image"`
+	ImageLink string `bson:"image_link" json:"image_link"`
+}
+
+func doGets(ctx *fastHttp.RequestCtx) (output []LanguageItem) {
+	results := languageModel.Gets()
+	for i := range results {
+		temImageLink := ""
+		if results[i].Image != "" {
+			fileDetail := fileModel.GetById(results[i].Image, true)
+			if fileDetail.ID != "" {
+				temImageLink = libUtilities.Request().GetBaseURL(ctx, "image/"+fileDetail.S3Key)
+			}
+		}
+		output = append(output, LanguageItem{
+			ID:        results[i].ID,
+			Name:      results[i].Name,
+			Code:      results[i].Code,
+			Image:     results[i].Image,
+			ImageLink: temImageLink,
+		})
+	}
+}

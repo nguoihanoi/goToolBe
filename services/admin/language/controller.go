@@ -80,8 +80,7 @@ func delete(ctx *fastHttp.RequestCtx) {
 
 func gets(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(true, "Get success!", 200)
-	results := languageModel.Gets()
-	resp.Data = results
+	resp.Data = doGets(ctx)
 	response.SendOutput(ctx, resp)
 }
 
