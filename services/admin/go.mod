@@ -9,7 +9,7 @@ require (
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261005043531-7dab96ffef19
 	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20260820102316-9cfc27f7ab2a
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261012164108-8b56c4c725aa
-	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013041122-a6ecdf41cb12
+	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013042250-719c4ae54f88
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261009084258-0e8b2d56f95b
 	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261005043531-7dab96ffef19
 	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260820100812-fd8d60ed8608

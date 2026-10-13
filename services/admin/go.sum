@@ -106,6 +106,8 @@ github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261012153010-1
 github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261012153010-1ed70115be86/go.mod h1:F5NflABFbf/PB3AN+2KSMOhgEXnrK44PSCHcAVDVSJ4=
 github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013041122-a6ecdf41cb12 h1:7QV08eJHf4BZ3MfE/D6BeJEIrRjBd3o5jwp97J7vkdI=
 github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013041122-a6ecdf41cb12/go.mod h1:u3x81TWXDPv9SIHXY7ti/R/pQLmxP2ZCh4hS7Mwt0EM=
+github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013042250-719c4ae54f88 h1:ZnkdS4eB2zNju88Yrep2Pbn8pzMfHYgYCTdQ6T4UeuY=
+github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013042250-719c4ae54f88/go.mod h1:u3x81TWXDPv9SIHXY7ti/R/pQLmxP2ZCh4hS7Mwt0EM=
 github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20260820102316-9cfc27f7ab2a h1:fugPclXbre1ADRgnWXbOgSXRpkaXdWGszmEAuRSTOsw=
 github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20260820102316-9cfc27f7ab2a/go.mod h1:HDmBP43xu2MHy/WG2WSGq9NUvtJW/TQpo0zvu/FfDeo=
 github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261002032602-122c5bbd0ab4 h1:CghZCm+k5ZD2Ki+uaq9mBQ0L6ZHU+AQ3zNbyaiRt+bI=
