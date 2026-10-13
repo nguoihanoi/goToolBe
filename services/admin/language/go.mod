@@ -31,8 +31,9 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260727103103-eab92e6e930e // indirect
 	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261001085837-9fb91920a281 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008071036-f4c6b396e5aa // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261013040225-8770af710770 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013040225-8770af710770 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261013040225-8770af710770 // indirect
 	github.com/redis/go-redis/v9 v9.21.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

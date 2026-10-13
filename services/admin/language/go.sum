@@ -104,10 +104,16 @@ github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008070652-6
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008070652-6b72703350f4/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008071036-f4c6b396e5aa h1:xzuHd0I7enh+P65rRp6PISrYg8Qt4PR2zxj0n9xrH3k=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261008071036-f4c6b396e5aa/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261013040225-8770af710770 h1:3oJN5ZoIjg9wQm1OFceo5yCtlRGc4/M2LL6twG9pgg0=
+github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261013040225-8770af710770/go.mod h1:usLEu07wJVIbJu2jHbGMrOwKFEEfI/SUAi9R3HkhNEE=
+github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013040225-8770af710770 h1:voVQTeVsCc8NOP83vkiIwxEXzZOSS+k9Eera8N39Sn0=
+github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013040225-8770af710770/go.mod h1:SR2be1SS30uQnIldm6SPi53J6enGBijXNLMGn1c95mQ=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9 h1:Q+bFno0q2AVPp4EbUFX5i9mEo0M4p4dAATkJzz3Ngms=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260812154144-a330795c46f9/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e h1:i9j2jwmSxLK6bzSl4cRSquNq4aj3pSu1zvfUemaJJto=
 github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261013040225-8770af710770 h1:nWqAwJe0o/jp+5ZCSX4L7FlvSDcP+BMLvZI1Uo51LnM=
+github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261013040225-8770af710770/go.mod h1:tTWua7xreYylFb8TAit2Epf3DMmFWh7tqSguBLfTYac=
 github.com/redis/go-redis/v9 v9.21.0 h1:FPBE4hhbAke+TLmcY3WkpbDffJEomdqPn3HYiqAtL9E=
 github.com/redis/go-redis/v9 v9.21.0/go.mod h1:v/M13XI1PVCDcm01VtPFOADfZtHf8YW3baQf57KlIkA=
 github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=
