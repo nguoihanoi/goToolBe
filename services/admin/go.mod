@@ -9,7 +9,7 @@ require (
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261005043531-7dab96ffef19
 	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20260820102316-9cfc27f7ab2a
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261012164108-8b56c4c725aa
-	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013043214-6438e7fccf03
+	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013043553-a59bc0117736
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261009084258-0e8b2d56f95b
 	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261005043531-7dab96ffef19
 	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260820100812-fd8d60ed8608
@@ -50,7 +50,7 @@ require (
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260820100812-fd8d60ed8608 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261013040225-8770af710770 // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013043132-e2dddffa3cab // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013043414-58a26b777fca // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261013040225-8770af710770 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect

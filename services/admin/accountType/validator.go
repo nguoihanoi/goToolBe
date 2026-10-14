@@ -56,13 +56,13 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, user
 			}
 			wg.Add(1)
 			sem <- struct{}{}
-			go func(id string) {
+			go func(code string) {
 				defer wg.Done()
 				defer func() { <-sem }()
 				if invalidPermFound.Load() {
 					return
 				}
-				permissionDetail := permissionModel.GetPermissionById(id, true)
+				permissionDetail := permissionModel.GetPermissionByCode(code)
 				if permissionDetail.ID == "" {
 					invalidPermFound.Store(true)
 				}

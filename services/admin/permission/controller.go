@@ -1,8 +1,6 @@
 package permission
 
 import (
-	"log"
-
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
 	libDb "github.com/nguoihanoi/golang_shared/libs/database"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
@@ -95,11 +93,6 @@ func delete(ctx *fastHttp.RequestCtx) {
 func gets(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(true, "Get success!", 200)
 	results := permissionModel.GetPermissions()
-	for i := 0; i < len(results); i += 1 {
-		temPms := permissionModel.GetPermissionsByType(results[i].ID)
-		log.Println(temPms)
-		results[i].Permissions = temPms
-	}
 	resp.Data = results
 	response.SendOutput(ctx, resp)
 }
