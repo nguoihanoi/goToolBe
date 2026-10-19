@@ -11,11 +11,13 @@ import (
 )
 
 type CreateInput struct {
-	AccountType string `bson:"account_type" json:"account_type"`
-	Email       string `bson:"email" json:"email"`
-	FirstName   string `bson:"first_name" json:"first_name"`
-	LastName    string `bson:"last_name" json:"last_name"`
-	Password    string `bson:"password" json:"password"`
+	AccountType string `validate:"" json:"account_type"`
+	Email       string `validate:"required,email" json:"email"`
+	FirstName   string `validate:"required" json:"first_name"`
+	LastName    string `validate:"required" json:"last_name"`
+	Gender      int    `validate:"min=0" json:"gender"`
+	Password    string `validate:"required" json:"password"`
+	BirthDay    string `validate:"required,datetime=2006-01-02" json:"birth_day"`
 }
 
 func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, status bool) {
@@ -65,11 +67,13 @@ func ValidateCreateInput(ctx *fastHttp.RequestCtx) (regRequest CreateInput, stat
 }
 
 type UpdateInput struct {
-	ID          string `bson:"_id" json:"_id"`
-	AccountType string `bson:"account_type" json:"account_type"`
-	Email       string `bson:"email" json:"email"`
-	FirstName   string `bson:"first_name" json:"first_name"`
-	LastName    string `bson:"last_name" json:"last_name"`
+	ID          string `validate:"required" json:"_id"`
+	AccountType string `validate:"" json:"account_type"`
+	Email       string `validate:"required,email" json:"email"`
+	FirstName   string `validate:"required" json:"first_name"`
+	LastName    string `validate:"required" json:"last_name"`
+	Gender      int    `validate:"min=0" json:"gender"`
+	BirthDay    string `validate:"required,datetime=2006-01-02" json:"birth_day"`
 }
 
 func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, status bool) {
@@ -128,7 +132,7 @@ func ValidateUpdateInput(ctx *fastHttp.RequestCtx) (regRequest UpdateInput, stat
 }
 
 type DeleteInput struct {
-	ID string `bson:"_id" json:"_id"`
+	ID string `validate:"required" json:"_id"`
 }
 
 func ValidateDeleteInput(ctx *fastHttp.RequestCtx) (regRequest DeleteInput, status bool) {
@@ -224,24 +228,23 @@ func ValidateActiveInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User
 }
 
 type UpdatePasswordInput struct {
-	UserId   string `validate:"required" json:"user_id"`
 	Password string `validate:"required" json:"password"`
 }
 
 func ValidateUpdatePasswordInput(ctx *fastHttp.RequestCtx) (oldUserDetail userModel.User, regRequest UpdatePasswordInput, status bool) {
 	status = false
+	userId := libUtilities.GetUserId(ctx)
+	if userId == "" {
+		response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
+		return
+	}
 	libProcess.Try(func() {
 		//Todo: get struct input
 		err := libUtilities.Validate(ctx, &regRequest)
 		if err != nil {
 			libProcess.Throw(err)
 		}
-		userId := libUtilities.GetUserId(ctx)
-		if userId == "" || userId != regRequest.UserId {
-			response.SendError(ctx, "You do not have permission to perform this function.", nil, 206)
-			return
-		}
-		oldUserDetail = userModel.GetUserById(regRequest.UserId, true)
+		oldUserDetail = userModel.GetUserById(userId, true)
 		if oldUserDetail.ID == "" {
 			response.SendError(ctx, "This account does not exist in the system.", nil, 206)
 			return

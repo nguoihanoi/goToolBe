@@ -1,6 +1,8 @@
 package user
 
 import (
+	"time"
+
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
 	libDb "github.com/nguoihanoi/golang_shared/libs/database"
 	libUtilities "github.com/nguoihanoi/golang_shared/libs/utilities"
@@ -22,12 +24,15 @@ func createUser(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Create false!", 206)
 	regRequest, status := ValidateCreateInput(ctx)
 	if status {
+		temBirthDay, _ := time.Parse("2006-01-02", regRequest.BirthDay)
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, "", false)
 		result := userModel.CreateUser(userModel.User{
 			AccountType:  regRequest.AccountType,
 			Email:        regRequest.Email,
 			FirstName:    regRequest.FirstName,
 			LastName:     regRequest.LastName,
+			Gender:       regRequest.Gender,
+			BirthDay:     temBirthDay,
 			Password:     Password,
 			PasswordHash: PasswordHash,
 			IsActive:     false,
@@ -43,11 +48,14 @@ func updateUser(ctx *fastHttp.RequestCtx) {
 	resp := response.GetOutput(false, "Update false!", 206)
 	regRequest, status := ValidateUpdateInput(ctx)
 	if status {
+		temBirthDay, _ := time.Parse("2006-01-02", regRequest.BirthDay)
 		updateOption := bSon.M{
 			"account_type": regRequest.AccountType,
 			"email":        regRequest.Email,
 			"first_name":   regRequest.FirstName,
 			"last_name":    regRequest.LastName,
+			"gender":       regRequest.Gender,
+			"birth_day":    temBirthDay,
 		}
 		result := userModel.UpdateUser(regRequest.ID, updateOption)
 		if result == true {
@@ -91,7 +99,7 @@ func updatePassword(ctx *fastHttp.RequestCtx) {
 	if status {
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
 		updateOption := bSon.M{"password_hash": PasswordHash, "password": Password}
-		result := userModel.UpdateUser(regRequest.UserId, updateOption)
+		result := userModel.UpdateUser(userDetail.ID, updateOption)
 		if result == true {
 			resp.Status = true
 			resp.Message = "Active success!"
