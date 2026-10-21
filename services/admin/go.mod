@@ -11,7 +11,7 @@ require (
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261012164108-8b56c4c725aa
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013043553-a59bc0117736
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261009084258-0e8b2d56f95b
-	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261005043531-7dab96ffef19
+	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261019101611-bcbed45fdd1c
 	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260820100812-fd8d60ed8608

@@ -138,6 +138,8 @@ github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261002032602-122c5bb
 github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261002032602-122c5bbd0ab4/go.mod h1:274ixkAK1Fp13Qqdq2PaXKjzwYetB04RzqbEqWydmuE=
 github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261005043531-7dab96ffef19 h1:CAUjZ5n/BZBggd19hu23eW2P+j+dcYIncFE9UdojsL4=
 github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261005043531-7dab96ffef19/go.mod h1:eaeAnmcG+duLDh6OMpPbd4XcS4XZwu9Y87TxI+1gA6A=
+github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261019101611-bcbed45fdd1c h1:RXsZqb3u7GoBnK/xzh2RW6jjbaGq/UwizY9+igOx5wY=
+github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261019101611-bcbed45fdd1c/go.mod h1:kOnZJ10JUMKswYZ35HR36TaMP9n2zcDshIup38WawQ8=
 github.com/nguoihanoi/golang_shared v1.0.0 h1:0qj8nH947hHNOvYKBus6zfFSNXF+yvW80TvKBf5zlOc=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260820100812-fd8d60ed8608 h1:CDenbDjDER6o2S4QQKeHKx+L4zZ07GO3ArpeHP0ufGE=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260820100812-fd8d60ed8608/go.mod h1:FeOWVOe+7JcSsZZAc5/x4tTXTs7DjyKtI8BJT28NrWg=
