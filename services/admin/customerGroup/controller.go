@@ -37,7 +37,7 @@ func search(ctx *fastHttp.RequestCtx) {
 			filter["status"] = regRequest.Status
 		}
 		inSortOrder = append(inSortOrder, bSon.E{Key: "name." + inLangCode, Value: 1})
-		results, total := customerModel.Search(filter, inSortOrder, regRequest.Page, regRequest.Limit)
+		results, total := customerModel.SearchGroups(filter, inSortOrder, regRequest.Page, regRequest.Limit)
 		if total > 0 {
 			resp.Status = true
 			resp.Message = "Search success!"
