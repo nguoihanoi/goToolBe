@@ -107,7 +107,7 @@ var customerGroupCmdMap = map[string]CommandHandler{
 	"gets":   gets,
 }
 
-func PermssionType(ctx *fastHttp.RequestCtx) {
+func CustomerGroup(ctx *fastHttp.RequestCtx) {
 	cmd := ctx.Request.Header.Peek("X-API-Cmd")
 
 	// Ép kiểu string ở đây nếu dùng Map, nhưng tra cứu O(1) rất nhanh

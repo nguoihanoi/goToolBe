@@ -45,9 +45,10 @@ require (
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/mattn/go-runewidth v0.0.28 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261021090028-f99cd320fe92 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260820100812-fd8d60ed8608 // indirect
 	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261005042424-2224c004b48e // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20260820100812-fd8d60ed8608 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20261021085615-b9b0315890a2 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261013040225-8770af710770 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013043414-58a26b777fca // indirect

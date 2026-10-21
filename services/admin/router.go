@@ -5,6 +5,7 @@ import (
 	fastHttpRouter "github.com/buaazp/fasthttprouter"
 	"github.com/nguoihanoi/goToolBe/services/admin/accountType"
 	"github.com/nguoihanoi/goToolBe/services/admin/customer"
+	"github.com/nguoihanoi/goToolBe/services/admin/customerGroup"
 	"github.com/nguoihanoi/goToolBe/services/admin/file"
 	"github.com/nguoihanoi/goToolBe/services/admin/language"
 	"github.com/nguoihanoi/goToolBe/services/admin/permission"
@@ -20,6 +21,7 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	language.InitController(inDb, inRedisClient, inJwtToken)
 	file.InitController(inDb, inRedisClient, inJwtToken, inFolderName)
 	customer.InitController(inDb, inRedisClient, inJwtToken)
+	customerGroup.InitController(inDb, inRedisClient, inJwtToken)
 	permission.InitController(inDb, inRedisClient, inJwtToken)
 	permissionType.InitController(inDb, inRedisClient, inJwtToken)
 	accountType.InitController(inDb, inRedisClient, inJwtToken)
@@ -36,7 +38,7 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	router.POST("/api/v1/language/group", language.Group)
 	router.POST("/api/v1/language/code", language.Code)
 	router.POST("/api/v1/customer", customer.Customer)
-	router.POST("/api/v1/customer/group", customer.CustomerGroup)
+	router.POST("/api/v1/customerGroup", customerGroup.CustomerGroup)
 	router.POST("/api/v1/permission", permission.Permssion)
 	router.POST("/api/v1/permissionType", permissionType.PermssionType)
 	router.POST("/api/v1/accountType", accountType.AccountType)
