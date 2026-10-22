@@ -94,7 +94,7 @@ func activeUser(ctx *fastHttp.RequestCtx) {
 	}
 }
 func updatePassword(ctx *fastHttp.RequestCtx) {
-	resp := response.GetOutput(false, "Active false!", 206)
+	resp := response.GetOutput(false, "Update false!", 206)
 	userDetail, regRequest, status := ValidateUpdatePasswordInput(ctx)
 	if status {
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
@@ -102,13 +102,13 @@ func updatePassword(ctx *fastHttp.RequestCtx) {
 		result := userModel.UpdateUser(userDetail.ID, updateOption)
 		if result == true {
 			resp.Status = true
-			resp.Message = "Active success!"
+			resp.Message = "Update success!"
 		}
 		response.SendOutput(ctx, resp)
 	}
 }
 func updatePasswordById(ctx *fastHttp.RequestCtx) {
-	resp := response.GetOutput(false, "Active false!", 206)
+	resp := response.GetOutput(false, "Update false!", 206)
 	userDetail, regRequest, status := ValidateUpdatePasswordByIdInput(ctx)
 	if status {
 		Password, PasswordHash := libUtilities.String().GetHashPassWord(regRequest.Password, userDetail.PasswordHash, false)
@@ -116,7 +116,7 @@ func updatePasswordById(ctx *fastHttp.RequestCtx) {
 		result := userModel.UpdateUser(regRequest.ID, updateOption)
 		if result == true {
 			resp.Status = true
-			resp.Message = "Active success!"
+			resp.Message = "Update success!"
 		}
 		response.SendOutput(ctx, resp)
 	}
