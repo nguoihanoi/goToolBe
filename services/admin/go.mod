@@ -6,7 +6,7 @@ require (
 	github.com/buaazp/fasthttprouter v0.1.1
 	github.com/joho/godotenv v1.5.1
 	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20261015042839-9517a745d961
-	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261022100510-337f412123aa
+	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261023081041-be7fbe95528f
 	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20260820102316-9cfc27f7ab2a
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261012164108-8b56c4c725aa
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013043553-a59bc0117736

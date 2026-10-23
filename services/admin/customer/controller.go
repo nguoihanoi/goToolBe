@@ -108,8 +108,11 @@ func searchCustomer(ctx *fastHttp.RequestCtx) {
 				bSon.D{{Key: "email", Value: regexValue}},
 			}
 		}
-		if regRequest.Status > -1 {
-			filter["status"] = regRequest.Status
+		switch regRequest.Status {
+		case 0:
+			filter["is_active"] = false
+		case 1:
+			filter["is_active"] = true
 		}
 		inSortOrder = append(inSortOrder, bSon.E{Key: "first_name", Value: 1})
 		inSortOrder = append(inSortOrder, bSon.E{Key: "last_name", Value: 1})

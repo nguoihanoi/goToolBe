@@ -80,6 +80,8 @@ github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261005043531-7da
 github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261005043531-7dab96ffef19/go.mod h1:4sMGD4JWPGw/iGyNDRZuB65dvFkUwXAjkDDsuVdUkdY=
 github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261022100510-337f412123aa h1:W+ot5XEoUlrwUl+j5DoFLMKk5TSNPfYH7UhwZB/1QcI=
 github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261022100510-337f412123aa/go.mod h1:DdTxYm5V4zklo6tiBffW0Eu6t7axJoAn56Op/mmSOE0=
+github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261023081041-be7fbe95528f h1:1PtI/x0pnGf7tOzwWIBwdxuVeUv0obOU8btRkiGElFM=
+github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261023081041-be7fbe95528f/go.mod h1:DdTxYm5V4zklo6tiBffW0Eu6t7axJoAn56Op/mmSOE0=
 github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261021090028-f99cd320fe92 h1:xqHLNgM+c2O5mHtkd9+LIcoN/X84OlAkEUfEQ/qlPTc=
 github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261021090028-f99cd320fe92/go.mod h1:B3jbVogWFx/bjnqQwzUbZNJU5EOpel4VW0UBet+4FzI=
 github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261021090518-6e383ddfeb37 h1:OlqT6llbCJKQBHtcTLnj2SCnNogSS2qZ9ZTGNpV4zkg=
