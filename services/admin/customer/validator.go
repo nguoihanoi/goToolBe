@@ -13,6 +13,7 @@ import (
 type SearchInput struct {
 	Key     string `validate:"" json:"key"`
 	GroupID string `validate:"" json:"group_id"`
+	Status  int64  `validate:"min=-1,max=1" json:"status"`
 	Page    int64  `validate:"min=1" json:"page"`
 	Limit   int64  `validate:"min=0" json:"limit"`
 }

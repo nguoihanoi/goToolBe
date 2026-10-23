@@ -6,7 +6,7 @@ require (
 	github.com/buaazp/fasthttprouter v0.1.1
 	github.com/joho/godotenv v1.5.1
 	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20261015042839-9517a745d961
-	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261005043531-7dab96ffef19
+	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261022100510-337f412123aa
 	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20260820102316-9cfc27f7ab2a
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261012164108-8b56c4c725aa
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261013043553-a59bc0117736
@@ -47,8 +47,8 @@ require (
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261021095103-bd34e80a996a // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260820100812-fd8d60ed8608 // indirect
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261005042424-2224c004b48e // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20261021085615-b9b0315890a2 // indirect
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261021085615-b9b0315890a2 // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20261022100023-98334c8e4daf // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261013040225-8770af710770 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013043414-58a26b777fca // indirect

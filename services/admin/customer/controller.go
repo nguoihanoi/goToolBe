@@ -108,6 +108,9 @@ func searchCustomer(ctx *fastHttp.RequestCtx) {
 				bSon.D{{Key: "email", Value: regexValue}},
 			}
 		}
+		if regRequest.Status > -1 {
+			filter["status"] = regRequest.Status
+		}
 		inSortOrder = append(inSortOrder, bSon.E{Key: "first_name", Value: 1})
 		inSortOrder = append(inSortOrder, bSon.E{Key: "last_name", Value: 1})
 		results, total := customerModel.Search(filter, inSortOrder, regRequest.Page, regRequest.Limit)
