@@ -10,6 +10,7 @@ import (
 	"github.com/nguoihanoi/goToolBe/services/admin/language"
 	"github.com/nguoihanoi/goToolBe/services/admin/permission"
 	"github.com/nguoihanoi/goToolBe/services/admin/permissionType"
+	"github.com/nguoihanoi/goToolBe/services/admin/scheduler"
 	"github.com/nguoihanoi/goToolBe/services/admin/user"
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
 	libDb "github.com/nguoihanoi/golang_shared/libs/database"
@@ -25,6 +26,7 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	permission.InitController(inDb, inRedisClient, inJwtToken)
 	permissionType.InitController(inDb, inRedisClient, inJwtToken)
 	accountType.InitController(inDb, inRedisClient, inJwtToken)
+	scheduler.InitPerSecond(inDb, inRedisClient, inJwtToken)
 	router.GET("/health", func(ctx *fastHttp.RequestCtx) {
 		ctx.SetStatusCode(fastHttp.StatusOK)
 		ctx.SetBodyString("Auth service is up and running")
