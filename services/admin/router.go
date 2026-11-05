@@ -18,6 +18,7 @@ import (
 )
 
 func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string, inFolderName string) {
+	go scheduler.InitPerMinute(inDb, inRedisClient, inJwtToken)
 	user.InitController(inDb, inRedisClient, inJwtToken)
 	language.InitController(inDb, inRedisClient, inJwtToken)
 	file.InitController(inDb, inRedisClient, inJwtToken, inFolderName)
@@ -26,7 +27,6 @@ func Init(router *fastHttpRouter.Router, inDb *libDb.DatabaseClass, inRedisClien
 	permission.InitController(inDb, inRedisClient, inJwtToken)
 	permissionType.InitController(inDb, inRedisClient, inJwtToken)
 	accountType.InitController(inDb, inRedisClient, inJwtToken)
-	go scheduler.InitPerMinute(inDb, inRedisClient, inJwtToken)
 	router.GET("/health", func(ctx *fastHttp.RequestCtx) {
 		ctx.SetStatusCode(fastHttp.StatusOK)
 		ctx.SetBodyString("Auth service is up and running")
