@@ -98,6 +98,8 @@ github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105045849-45be76a
 github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105045849-45be76a4e925/go.mod h1:fkuAIhvPpe4HC2pVwNLNb/gH8dYcGeTVMAc1jy5vri0=
 github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105050129-4653404d12b7 h1:VtIpPpqp6j97YzQQNrlADUNjQCDdXsv47oI1dP35Vt4=
 github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105050129-4653404d12b7/go.mod h1:fkuAIhvPpe4HC2pVwNLNb/gH8dYcGeTVMAc1jy5vri0=
+github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105050452-b038231148cb h1:i73KK5k89J2Tj+bOAMJ0ak9tOzccTekq9hFWr3kMnDw=
+github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105050452-b038231148cb/go.mod h1:fkuAIhvPpe4HC2pVwNLNb/gH8dYcGeTVMAc1jy5vri0=
 github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261012164108-8b56c4c725aa h1:abC58OTVgTcSQmq1X96Mfxwi4Pgqklrq48MQ37EkR8A=
 github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261012164108-8b56c4c725aa/go.mod h1:SRZMtDAGX26MGn5wZRQ/NcuP9fn0y4GUDxd+D8pjpv4=
 github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261105030215-6951b5aa40bc h1:C4JL4dkGQvUewVw4CyRnXNRMJZrKEXfLZiXuLzhZUhM=

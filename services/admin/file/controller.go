@@ -8,7 +8,6 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -203,7 +202,6 @@ func ViewImage(ctx *fastHttp.RequestCtx) {
 	cleanFileName := filepath.Base(fileName)
 	fileId := strings.Split(cleanFileName, ".")[0]
 	fileDetail := fileModel.GetById(fileId, true)
-	log.Println("view image", fileName, cleanFileName, fileId, fileDetail.ID, fileDetail.LocalPath)
 	if fileDetail.ID != "" {
 		filePath := fileDetail.LocalPath
 		imageData, err := os.ReadFile(filePath)
