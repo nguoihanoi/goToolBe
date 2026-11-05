@@ -8,12 +8,12 @@ require (
 	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261105042317-ddc3481a4639
-	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105050452-b038231148cb
+	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105083152-97e915b58b82
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261105042317-ddc3481a4639
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105044349-0364e218e30b
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105082751-b28d166c43dc
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20261022100023-98334c8e4daf
 	github.com/nguoihanoi/golang_shared/libs/middleware v0.0.0-20261001085837-9fb91920a281
@@ -50,7 +50,7 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260820100812-fd8d60ed8608 // indirect
 	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105044349-0364e218e30b // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20261022100023-98334c8e4daf // indirect
-	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e // indirect
+	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261105083041-9310f3dd5f75 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261105035015-5da67b036aab // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261022100023-98334c8e4daf // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261022100023-98334c8e4daf // indirect
