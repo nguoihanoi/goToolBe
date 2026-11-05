@@ -2,7 +2,6 @@ package scheduler
 
 import (
 	"fmt"
-	"log"
 	"time"
 
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
@@ -28,8 +27,6 @@ func InitPerMinute(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJ
 func processUpdateCodes(inRedisClient *libCache.Cache) {
 	fmt.Println("Chạy mỗi phút:", time.Now())
 	queueNewCodes := inRedisClient.NewQueue("queue_new_codes")
-	queueNewCodes.Push("abc")
-	log.Println("----")
 	total := queueNewCodes.Count()
 	if total > 0 {
 		return
