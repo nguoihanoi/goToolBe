@@ -3,10 +3,10 @@ module github.com/nguoihanoi/goToolBe/services/admin/accountType
 go 1.25.0
 
 require (
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261022100023-98334c8e4daf
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105034523-49bc8431c4cc
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92fd68
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105030756-80a83c392c43
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105035015-5da67b036aab
 	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261005042424-2224c004b48e
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20261005042424-2224c004b48e
 	github.com/valyala/fasthttp v1.73.0

@@ -54,6 +54,8 @@ github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260818161833-6e418b97eb9
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260818161833-6e418b97eb99/go.mod h1:FeOWVOe+7JcSsZZAc5/x4tTXTs7DjyKtI8BJT28NrWg=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261022100023-98334c8e4daf h1:fdrUHR+biwfWqsPrvCPtzt/v5+74ZdzeUNJIX2ei03I=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261022100023-98334c8e4daf/go.mod h1:FeOWVOe+7JcSsZZAc5/x4tTXTs7DjyKtI8BJT28NrWg=
+github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105034523-49bc8431c4cc h1:09VXSYI1M7V8VZ4nxQhM0mwUkatDyi8jYs67qwpHdxU=
+github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105034523-49bc8431c4cc/go.mod h1:FeOWVOe+7JcSsZZAc5/x4tTXTs7DjyKtI8BJT28NrWg=
 github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731084734-f56a879327a9 h1:FCpA6dnLlsP1ITo2vaan0KUZZr7mBJS69pR1Rn2k6WA=
 github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731084734-f56a879327a9/go.mod h1:gghUNpZvckQOW6gJ3D/cvBt0YnSKBMkANIm1CwFLBsI=
 github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807040627-fc2f9a418e47 h1:if7YUofoGXpjESl79/SxPOFEs6VHs5WV6V4ksTNlHFA=
@@ -80,6 +82,8 @@ github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261022100023-98334c8
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261022100023-98334c8e4daf/go.mod h1:5N4kXf+IfMEfj5sYGootYACJeojmvxxtvksruxb+D9o=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105030756-80a83c392c43 h1:B66H/z8DFBDaaw3zru/k3L+zAxdWBVCSJF2Vc8dgSBE=
 github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105030756-80a83c392c43/go.mod h1:Su+SXylQ4MJ8QjWNtA7E8c9iAJlmXSMre0CL7IlcYt8=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105035015-5da67b036aab h1:S9ytlrzfHDaV8IZpyfNkRJjUJAIdOLm3G32KrAwYhic=
+github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105035015-5da67b036aab/go.mod h1:RrdoR0PzOCnM6RZ4yvaij7fw0+MwdLskDW2XqxCG1VM=
 github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e h1:Z4yfGjbhV7aIVicOoH5ycdFQ8m7Jtsl01U/nBXN5WXE=
 github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e/go.mod h1:o1xR/Z1RSr/4M0rVPTM4dp7UwNuMZaY8BB5uBhU2S5o=
 github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260812154144-a330795c46f9 h1:vbkwtuyVf8FCkndnqAdw+71xgHP2fU7UHWAjViacMFo=
