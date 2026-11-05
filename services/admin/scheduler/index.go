@@ -33,7 +33,6 @@ func processUpdateCodes(inRedisClient *libCache.Cache) {
 		return
 	}
 	languages := languageModel.Gets()
-	fmt.Println("languages:", languages)
 	for i := 0; i < int(total); i += 1 {
 		item := queueNewCodes.Pop()
 		fmt.Println("item:", item)

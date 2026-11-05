@@ -3,10 +3,10 @@ module github.com/nguoihanoi/goToolBe/services/admin/customerGroup
 go 1.25.0
 
 require (
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105034523-49bc8431c4cc
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105044140-f0d08e62e980
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260807155829-4b89fb92fd68
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260807155829-4b89fb92fd68
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105035015-5da67b036aab
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105044349-0364e218e30b
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20261021085615-b9b0315890a2
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261013040225-8770af710770
 	github.com/nguoihanoi/golang_shared/warehouses/permissions v0.0.0-20261013040225-8770af710770

@@ -25,11 +25,11 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105034523-49bc8431c4cc // indirect
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105044140-f0d08e62e980 // indirect
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731084734-f56a879327a9 // indirect
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260816155621-0d2e03bc9921 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260817035602-27ded19f563b // indirect
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105035015-5da67b036aab // indirect
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105044349-0364e218e30b // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20260817153949-2656a49f1d59 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260817035602-27ded19f563b // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260817035602-27ded19f563b // indirect
