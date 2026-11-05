@@ -78,6 +78,8 @@ github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-202610090842
 github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261009084258-0e8b2d56f95b/go.mod h1:lnJhu2liMooMOm2nkX8779Y5LFPmLchNVy9eOmzA8nM=
 github.com/nguoihanoi/goToolBe/services/admin/scheduler v0.0.0-20261023094536-857ca363b372 h1:oG+/xM8DZAU7cHFfGRh6HfK35Cv1pDEB4p2sRMcVodk=
 github.com/nguoihanoi/goToolBe/services/admin/scheduler v0.0.0-20261023094536-857ca363b372/go.mod h1:0ZUwl+VA7Wb+qE3b3Mt6XQziLOVJtjAR8uIVLAC/Vqw=
+github.com/nguoihanoi/goToolBe/services/admin/scheduler v0.0.0-20261023104239-c1743813ace1 h1:waSxaSTc1DwwgF4wIGLRX5YeRt48uqbgIGFYPhgOZ/4=
+github.com/nguoihanoi/goToolBe/services/admin/scheduler v0.0.0-20261023104239-c1743813ace1/go.mod h1:0ZUwl+VA7Wb+qE3b3Mt6XQziLOVJtjAR8uIVLAC/Vqw=
 github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261019101611-bcbed45fdd1c h1:RXsZqb3u7GoBnK/xzh2RW6jjbaGq/UwizY9+igOx5wY=
 github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261019101611-bcbed45fdd1c/go.mod h1:kOnZJ10JUMKswYZ35HR36TaMP9n2zcDshIup38WawQ8=
 github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20260820100812-fd8d60ed8608 h1:CDenbDjDER6o2S4QQKeHKx+L4zZ07GO3ArpeHP0ufGE=

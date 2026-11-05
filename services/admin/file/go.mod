@@ -29,7 +29,7 @@ require (
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260731084734-f56a879327a9 // indirect
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20260816155621-0d2e03bc9921 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260817035602-27ded19f563b // indirect
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20260820100812-fd8d60ed8608 // indirect
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261022100023-98334c8e4daf // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20260817153949-2656a49f1d59 // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20260817035602-27ded19f563b // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/users v0.0.0-20260817035602-27ded19f563b // indirect
