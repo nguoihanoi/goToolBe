@@ -46,7 +46,7 @@ require (
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/mattn/go-runewidth v0.0.28 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
-	github.com/nguoihanoi/goToolBe/services/admin/scheduler v0.0.0-20261105040906-4b2805fc0a12 // indirect
+	github.com/nguoihanoi/goToolBe/services/admin/scheduler v0.0.0-20261105041914-e0b6f7d03285 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260820100812-fd8d60ed8608 // indirect
 	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105035015-5da67b036aab // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20261022100023-98334c8e4daf // indirect

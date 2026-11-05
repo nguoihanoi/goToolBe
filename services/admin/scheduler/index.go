@@ -29,7 +29,7 @@ func processUpdateCodes(inRedisClient *libCache.Cache) {
 	queueNewCodes := inRedisClient.NewQueue("queue_new_codes")
 	total := queueNewCodes.Count()
 	fmt.Println("total:", total)
-	if total > 0 {
+	if total == 0 {
 		return
 	}
 	languages := languageModel.Gets()
