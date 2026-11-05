@@ -8,7 +8,7 @@ require (
 	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261105042317-ddc3481a4639
-	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105045849-45be76a4e925
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261105042317-ddc3481a4639
@@ -48,7 +48,7 @@ require (
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/nguoihanoi/goToolBe/services/admin/scheduler v0.0.0-20261105042317-ddc3481a4639 // indirect
 	github.com/nguoihanoi/golang_shared/libs/process v0.0.0-20260820100812-fd8d60ed8608 // indirect
-	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105035015-5da67b036aab // indirect
+	github.com/nguoihanoi/golang_shared/libs/utilities v0.0.0-20261105044349-0364e218e30b // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/customers v0.0.0-20261022100023-98334c8e4daf // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/files v0.0.0-20261005042424-2224c004b48e // indirect
 	github.com/nguoihanoi/golang_shared/warehouses/languages v0.0.0-20261105035015-5da67b036aab // indirect
