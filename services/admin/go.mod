@@ -8,7 +8,7 @@ require (
 	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261105042317-ddc3481a4639
-	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105045849-45be76a4e925
+	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105050129-4653404d12b7
 	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261105042317-ddc3481a4639
 	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261105042317-ddc3481a4639
