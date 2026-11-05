@@ -5,15 +5,15 @@ go 1.26.5
 require (
 	github.com/buaazp/fasthttprouter v0.1.1
 	github.com/joho/godotenv v1.5.1
-	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261105040906-4b2805fc0a12
-	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105044140-f0d08e62e980
+	github.com/nguoihanoi/goToolBe/services/admin/accountType v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/customer v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/customerGroup v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/file v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/language v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/permission v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/permissionType v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/goToolBe/services/admin/user v0.0.0-20261105042317-ddc3481a4639
+	github.com/nguoihanoi/golang_shared/libs/cache v0.0.0-20261105044349-0364e218e30b
 	github.com/nguoihanoi/golang_shared/libs/crypto v0.0.0-20260820100812-fd8d60ed8608
 	github.com/nguoihanoi/golang_shared/libs/database v0.0.0-20261022100023-98334c8e4daf
 	github.com/nguoihanoi/golang_shared/libs/middleware v0.0.0-20261001085837-9fb91920a281
