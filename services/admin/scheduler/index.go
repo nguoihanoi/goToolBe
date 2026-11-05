@@ -2,6 +2,7 @@ package scheduler
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	libCache "github.com/nguoihanoi/golang_shared/libs/cache"
@@ -13,11 +14,11 @@ import (
 var newCron *cron.Cron
 
 func InitPerMinute(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJwtToken string) {
-	newCron = cron.New()
+	newCron = cron.New(cron.WithSeconds())
 	languageModel.InitModel(inDb, inRedisClient)
 
 	// Chạy mỗi phút
-	newCron.AddFunc("* * * * *", func() {
+	newCron.AddFunc("1 * * * * *", func() {
 		processUpdateCodes(inRedisClient)
 	})
 
@@ -27,6 +28,8 @@ func InitPerMinute(inDb *libDb.DatabaseClass, inRedisClient *libCache.Cache, inJ
 func processUpdateCodes(inRedisClient *libCache.Cache) {
 	fmt.Println("Chạy mỗi phút:", time.Now())
 	queueNewCodes := inRedisClient.NewQueue("queue_new_codes")
+	queueNewCodes.Push("abc")
+	log.Println("----")
 	total := queueNewCodes.Count()
 	if total > 0 {
 		return
